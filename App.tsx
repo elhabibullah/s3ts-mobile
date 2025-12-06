@@ -60,7 +60,7 @@ const App: React.FC = () => {
                 <div className="max-w-2xl mx-auto">
                     <span className="block text-[10px] font-bold tracking-[0.3em] uppercase text-gray-400 mb-6">The Revolution</span>
                     <h2 className="text-2xl md:text-3xl font-display font-normal mb-8 text-gray-900 leading-snug">
-                        The Impossible, <br/> Now Possible.
+                        The Impossible, <br/> Is Now Possible.
                     </h2>
                     <p className="text-sm text-gray-500 leading-loose font-light tracking-wide">
                         S3Ts Pro 3.0 represents the pinnacle of post-silicon engineering. 
@@ -127,7 +127,7 @@ const App: React.FC = () => {
                         </div>
                         <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8 leading-tight">0% Lithium.<br/>100% Infinite.</h2>
                         <p className="text-sm md:text-base text-gray-600 mb-8 font-light leading-relaxed">
-                            The S3Ts Pro 3.0 requires no cables. Nano-optic solar cells cover the entire back and frame, harvesting energy from ambient light even while in use.
+                            The S3Ts Pro 3.0 harvests energy from the solar system. Nano-optic receptors cover the entire titanium frame, converting ambient light into perpetual power.
                         </p>
                         <ul className="space-y-6 mb-10">
                             <li className="flex items-center gap-4 text-gray-800 text-[10px] tracking-[0.2em] uppercase font-bold">
@@ -282,7 +282,7 @@ const App: React.FC = () => {
                 <button 
                     onClick={() => setActiveInfoModal(null)}
                     className="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
-                >
+                  >
                     <X size={24} />
                 </button>
                 

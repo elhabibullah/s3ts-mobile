@@ -17,6 +17,15 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
             <div className="text-[10px] uppercase tracking-widest text-gray-400">
                 Store / Smartphones / S3Ts Pro 3.0
             </div>
+            {/* Logo removed from here as requested previously */}
+             {/* Branding Logo */}
+             <div className="mt-6">
+                <img 
+                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
+                    alt="S3Ts Logo" 
+                    className="h-20 w-auto"
+                />
+            </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-16">
@@ -177,8 +186,8 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
                               <h3 className="text-sm font-bold uppercase tracking-widest border-b border-black pb-2 mb-4">Energy</h3>
                               <div className="grid grid-cols-2 gap-y-2 text-sm font-light text-gray-600">
                                   <div className="text-gray-900 font-medium">Technology</div><div>0% Lithium / Nano-optic Solar Cells</div>
-                                  <div className="text-gray-900 font-medium">Charging</div><div>Continuous (Ambient Light)</div>
-                                  <div className="text-gray-900 font-medium">Reserve</div><div>72h Quantum Capacitor (Darkness)</div>
+                                  <div className="text-gray-900 font-medium">Charging</div><div>Continuous Solar Harvesting (On or Off State) - Always Full</div>
+                                  <div className="text-gray-900 font-medium">Reserve</div><div>72h Quantum Capacitor Reserve (Darkness)</div>
                               </div>
                           </div>
                       </div>

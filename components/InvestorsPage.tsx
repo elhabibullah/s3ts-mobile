@@ -26,7 +26,7 @@ const InvestorsPage: React.FC = () => {
         </div>
 
         {/* Portal Access Card */}
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md mb-16">
             <div className="bg-white text-black p-8 md:p-12 shadow-2xl relative min-h-[500px] flex flex-col justify-center">
               
               {submissionStatus === 'success' ? (
@@ -141,6 +141,7 @@ const InvestorsPage: React.FC = () => {
               )}
             </div>
         </div>
+
       </div>
     </div>
   );
