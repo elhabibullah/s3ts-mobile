@@ -9,12 +9,14 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
   const [showSpecs, setShowSpecs] = useState(false);
 
   return (
-    <div className="pt-24 pb-20 bg-white min-h-screen animate-fade-in relative">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 reveal active">
+    <div className="pb-20 bg-white min-h-screen animate-fade-in relative">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 reveal active pt-8">
         
-        {/* Breadcrumb */}
-        <div className="text-[10px] uppercase tracking-widest text-gray-400 mb-12">
-            Store / Smartphones / S3Ts Pro 3.0
+        {/* Header - Simple Breadcrumbs */}
+        <div className="flex flex-col items-center mb-16">
+            <div className="text-[10px] uppercase tracking-widest text-gray-400">
+                Store / Smartphones / S3Ts Pro 3.0
+            </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-16">
@@ -39,9 +41,6 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
             <div className="flex-1 pt-4">
                 <div className="border-b border-gray-100 pb-8 mb-8">
                     <h1 className="text-3xl md:text-5xl font-display text-gray-900 mb-2">S3Ts Pro 3.0</h1>
-                    <p className="text-xs text-gray-500 tracking-widest uppercase mb-1">
-                        Invented by Abdelwahid Habibullah Adam Banu Hashim
-                    </p>
                     <p className="text-sm text-gray-500 font-light tracking-wide mb-6">Titanium Edition • 1TB Quantum Storage</p>
                     <div className="text-2xl font-light text-gray-900">SAR 6,999.00</div>
                     <p className="text-xs text-green-600 mt-2 flex items-center gap-2">
@@ -135,15 +134,6 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
 
                       <div className="space-y-8">
                           <div>
-                              <h3 className="text-sm font-bold uppercase tracking-widest border-b border-black pb-2 mb-4">Invention & Leadership</h3>
-                              <div className="grid grid-cols-2 gap-y-2 text-sm font-light text-gray-600">
-                                  <div className="text-gray-900 font-medium">Founder & Inventor</div><div>Abdelwahid Habibullah Adam Banu Hashim</div>
-                                  <div className="text-gray-900 font-medium">Headquarters</div><div>Riyadh, Saudi Arabia</div>
-                                  <div className="text-gray-900 font-medium">Engineering</div><div>S3Ts Tech Elite Team</div>
-                              </div>
-                          </div>
-
-                          <div>
                               <h3 className="text-sm font-bold uppercase tracking-widest border-b border-black pb-2 mb-4">Structure & Build</h3>
                               <div className="grid grid-cols-2 gap-y-2 text-sm font-light text-gray-600">
                                   <div className="text-gray-900 font-medium">Chassis</div><div>Aerospace-grade Alpha Titanium Alloy</div>
@@ -160,6 +150,17 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
                                   <div className="text-gray-900 font-medium">Holographic Engine</div><div>S3Ts HOLO-Beam 3D (180° Projection)</div>
                                   <div className="text-gray-900 font-medium">AR/VR</div><div>Glasses-free spatial computing</div>
                                   <div className="text-gray-900 font-medium">Brightness</div><div>Auto-boost (Direct Sunlight Readable)</div>
+                              </div>
+                          </div>
+
+                          <div>
+                              <h3 className="text-sm font-bold uppercase tracking-widest border-b border-black pb-2 mb-4">Connectivity & Network</h3>
+                              <div className="grid grid-cols-2 gap-y-2 text-sm font-light text-gray-600">
+                                  <div className="text-gray-900 font-medium">Satellite Internet</div><div>S3Ts Quantum-Link™ (Built-in)</div>
+                                  <div className="text-gray-900 font-medium">Coverage</div><div>Global (100% Earth Surface)</div>
+                                  <div className="text-gray-900 font-medium">Cost</div><div>Free Unlimited Lifetime Data</div>
+                                  <div className="text-gray-900 font-medium">Speed</div><div>6G Quantum Standard</div>
+                                  <div className="text-gray-900 font-medium">Type</div><div>Hybrid Mobile-Satellite</div>
                               </div>
                           </div>
 

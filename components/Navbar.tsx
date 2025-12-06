@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Search, ShoppingBag, User, Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '../constants';
 
 interface NavbarProps {
   onNavigate: (view: 'home' | 'store') => void;
   cartCount?: number;
+  currentView: 'home' | 'store' | 'investors';
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0 }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleNavClick = (href: string) => {
     if (href === '#store') {
@@ -38,13 +30,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0 }) => {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ease-in-out ${
-          isScrolled || mobileMenuOpen 
-            ? 'bg-white/95 backdrop-blur-md shadow-sm text-gray-900 py-2' 
-            : 'bg-transparent text-white py-4 hover:bg-white/90 hover:text-gray-900'
-        }`}
+        className="fixed top-0 w-full z-50 bg-white shadow-sm text-gray-900 transition-all duration-300 h-16 md:h-24 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative flex items-center justify-between h-14 md:h-16">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative flex items-center justify-between w-full h-full">
           
           {/* Desktop Nav (Left) */}
           <div className="hidden lg:flex items-center gap-8 flex-1">
@@ -62,18 +50,20 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0 }) => {
 
           {/* Mobile Menu Toggle (Left) */}
           <button 
-            className="lg:hidden text-inherit flex-1 flex justify-start z-50"
+            className="lg:hidden text-black flex-1 flex justify-start z-50"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          {/* Center Logo - Typography matched to Hero Title (Cinzel, Medium, Tracking Wide) */}
+          {/* Center Logo - Image Based - Always visible on white bg */}
           <div className="flex-0 flex justify-center absolute left-1/2 transform -translate-x-1/2 z-50">
             <button onClick={() => onNavigate('home')} className="flex flex-col items-center group">
-               <span className="text-2xl font-display font-medium tracking-wide text-inherit">
-                  S3Ts
-               </span>
+               <img 
+                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
+                  alt="S3Ts Logo" 
+                  className="h-14 md:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
+               />
             </button>
           </div>
 

@@ -36,11 +36,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         
         {/* Brand */}
-        <div className="mb-16">
-            <h2 className="text-3xl font-display font-bold tracking-[0.2em] mb-4">S3Ts</h2>
-            <p className="text-gray-500 text-xs tracking-widest uppercase max-w-sm leading-relaxed">
-                Pioneering the post-silicon era with holographic interfaces and infinite energy systems.
-            </p>
+        <div className="mb-16 flex items-center gap-6">
+            <img 
+                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
+                alt="S3Ts Logo" 
+                className="h-24 w-auto"
+            />
+            <span className="text-xl md:text-2xl font-display text-white tracking-wide">
+                S3Ts Pro 3.0
+            </span>
         </div>
 
         {/* Links Grid */}
@@ -76,8 +80,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               ))}
           </div>
 
-          <div className="text-[10px] text-gray-600 tracking-widest uppercase">
-             © 2025 S3Ts Tech Corp.
+          <div className="flex items-center gap-2 text-[10px] text-gray-600 tracking-widest uppercase">
+             <span>© 2025 S3Ts</span>
+             <img 
+                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
+                alt="Logo" 
+                className="h-5 w-auto"
+            />
           </div>
 
           <div className="flex items-center gap-2 text-gray-500 hover:text-white cursor-pointer transition-colors">
