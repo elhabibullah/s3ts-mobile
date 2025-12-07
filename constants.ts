@@ -14,9 +14,9 @@ export const HERO_SLIDES = [
     id: 1,
     title: "S3Ts Pro 3.0",
     subtitle: "The Holographic Revolution. Unbreakable. Infinite.",
-    image: "https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_recto_verso.jpg",
+    image: "https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Metaball_liquid_wt_bg.mp4",
     cta: "Pre-Order Now",
-    theme: "dark"
+    theme: "light"
   }
 ];
 

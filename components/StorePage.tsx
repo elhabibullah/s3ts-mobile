@@ -17,7 +17,6 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
             <div className="text-[10px] uppercase tracking-widest text-gray-400">
                 Store / Smartphones / S3Ts Pro 3.0
             </div>
-            {/* Logo removed from here as requested previously */}
              {/* Branding Logo */}
              <div className="mt-6">
                 <img 
@@ -30,19 +29,14 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart }) => {
 
         <div className="flex flex-col md:flex-row gap-16">
             
-            {/* Left: Gallery */}
+            {/* Left: Main Image Only (Gallery Removed) */}
             <div className="flex-1">
-                <div className="bg-gray-50 aspect-[4/5] w-full mb-4 relative overflow-hidden">
+                <div className="bg-gray-50 aspect-[4/5] w-full mb-4 relative overflow-hidden flex items-center justify-center">
                     <img 
-                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_recto_verso.jpg" 
+                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-transparent-grey.png" 
                         alt="S3Ts Pro 3.0 Titanium" 
-                        className="w-full h-full object-contain p-8 hover:scale-105 transition-transform duration-700"
+                        className="w-[85%] h-auto object-contain hover:scale-105 transition-transform duration-700 drop-shadow-2xl"
                     />
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-gray-50 aspect-square cursor-pointer border border-black"><img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3TS_hightech.png" className="w-full h-full object-cover" /></div>
-                    <div className="bg-gray-50 aspect-square cursor-pointer border border-transparent hover:border-gray-300"><img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts+_facial_recognition.jpg" className="w-full h-full object-cover" /></div>
-                    <div className="bg-gray-50 aspect-square cursor-pointer border border-transparent hover:border-gray-300"><img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts+_nolithium.jpg" className="w-full h-full object-cover" /></div>
                 </div>
             </div>
 

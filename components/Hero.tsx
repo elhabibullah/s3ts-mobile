@@ -8,76 +8,78 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-advance slider
+  // Auto-advance slider (only if multiple slides, otherwise keep static)
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 6000);
-    return () => clearInterval(timer);
+    if (HERO_SLIDES.length > 1) {
+        const timer = setInterval(() => {
+          setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+        }, 6000);
+        return () => clearInterval(timer);
+    }
   }, []);
 
+  const isVideo = (url: string) => url.endsWith('.mp4');
+
   return (
-    <div className="relative w-full h-[500px] md:h-[75vh] overflow-hidden bg-black">
+    <div className="relative w-full overflow-hidden flex flex-col items-center pt-12 md:pt-16 pb-0 bg-white">
       {HERO_SLIDES.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          className={`w-full flex flex-col items-center justify-start transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0 hidden'
           }`}
         >
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-[10000ms] ease-linear transform scale-105"
-            style={{ 
-                backgroundImage: `url(${slide.image})`,
-                transform: index === currentSlide ? 'scale(1.0)' : 'scale(1.05)' 
-            }}
-          >
-            <div className="absolute inset-0 bg-black/30"></div>
+          
+          {/* 1. Phone Image - Centered and Dominant */}
+          <div className="relative z-20 w-[90%] max-w-[500px] md:w-[750px] flex-shrink-0 mb-0">
+             <img 
+                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-transparent-grey.png" 
+                alt="S3Ts Pro 3.0"
+                className="w-full h-auto drop-shadow-2xl object-contain"
+              />
           </div>
 
-          {/* Content */}
-          <div className="absolute inset-0 flex items-center justify-center text-center">
-            <div className="max-w-[1440px] mx-auto w-full px-6">
-              <div className={`max-w-4xl mx-auto transition-all duration-1000 delay-300 transform ${
-                  index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}>
-                <h2 className={`text-3xl md:text-4xl lg:text-5xl font-display font-medium tracking-wide mb-6 ${slide.theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                  {slide.title}
-                </h2>
-                <p className={`text-base md:text-lg mb-10 font-light tracking-wide ${slide.theme === 'dark' ? 'text-gray-200' : 'text-gray-800'}`}>
-                  {slide.subtitle}
-                </p>
-                <div className="flex justify-center">
-                    <button 
-                        onClick={() => onNavigate('store')}
-                        className={`
-                            group flex items-center gap-3 px-10 py-4 font-medium text-xs tracking-[0.2em] uppercase transition-all duration-300 border
-                            ${slide.theme === 'dark' 
-                                ? 'border-white text-white hover:bg-white hover:text-black' 
-                                : 'border-black text-black hover:bg-black hover:text-white'}
-                        `}>
-                        {slide.cta}
-                    </button>
-                </div>
+          {/* 2. Bubble Container (Video Background + Text Foreground) */}
+          {/* MOVED HIGHER: Changed mt-1 to -mt-10 md:-mt-20 to pull it up */}
+          <div className="relative z-10 w-full flex flex-col items-center justify-center -mt-10 md:-mt-20 mb-[-80px] md:mb-[-250px]">
+              
+              {/* The Bubble (Video) */}
+              <div className="relative w-[250%] md:w-[2200px] flex items-center justify-center">
+                 {isVideo(slide.image) ? (
+                    <video 
+                        autoPlay 
+                        loop 
+                        muted 
+                        playsInline 
+                        className="w-full h-auto object-contain brightness-110 saturate-110"
+                    >
+                        <source src={slide.image} type="video/mp4" />
+                    </video>
+                 ) : null}
+
+                 {/* Text - Centered inside bubble */}
+                 <div className="absolute inset-0 flex flex-col items-center justify-center pt-24 md:pt-48">
+                    <h2 className="text-4xl md:text-8xl font-display font-medium tracking-wide mb-8 text-black drop-shadow-sm text-center">
+                      {slide.title}
+                    </h2>
+                    <p className="hidden md:block text-xl font-light tracking-wide text-gray-800 mb-10 max-w-2xl mx-auto text-center">
+                      {slide.subtitle}
+                    </p>
+                    <div className="flex justify-center mt-4">
+                        <button 
+                            onClick={() => onNavigate('store')}
+                            className="bg-black text-white px-10 py-4 md:px-14 md:py-6 text-xs md:text-sm font-bold tracking-[0.25em] uppercase hover:bg-zinc-800 transition-all duration-300 shadow-2xl relative z-30"
+                        >
+                            {slide.cta}
+                        </button>
+                    </div>
+                 </div>
               </div>
-            </div>
+
           </div>
+
         </div>
       ))}
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-4 z-10">
-        {HERO_SLIDES.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`transition-all duration-500 ${
-              index === currentSlide ? 'w-8 bg-white h-[2px]' : 'w-2 bg-white/50 h-[2px] hover:bg-white'
-            }`}
-          />
-        ))}
-      </div>
     </div>
   );
 };

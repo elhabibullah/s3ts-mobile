@@ -3,9 +3,9 @@ import { Search, ShoppingBag, User, Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '../constants';
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'store') => void;
+  onNavigate: (view: 'home' | 'store' | 'investors' | 'about') => void;
   cartCount?: number;
-  currentView: 'home' | 'store' | 'investors';
+  currentView: 'home' | 'store' | 'investors' | 'about';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView }) => {

@@ -6,15 +6,16 @@ import Footer from './components/Footer';
 import ChatSupport from './components/ChatSupport';
 import StorePage from './components/StorePage';
 import InvestorsPage from './components/InvestorsPage';
+import AboutPage from './components/AboutPage';
 import { PRODUCTS } from './constants';
-import { Cpu, Sun, Smartphone, Wifi, ScanFace, Award, MessageSquare, Box, Mic, Globe, ShieldCheck, X, Satellite, Radio, MapPin } from 'lucide-react';
+import { Cpu, Sun, Smartphone, Wifi, ScanFace, Award, MessageSquare, Box, Mic, Globe, ShieldCheck, X, Satellite, Radio, MapPin, Check } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'store' | 'investors'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'store' | 'investors' | 'about'>('home');
   const [cartCount, setCartCount] = useState(0);
   const [activeInfoModal, setActiveInfoModal] = useState<'chat' | 'quantum' | null>(null);
 
-  const handleNavigate = (view: 'home' | 'store' | 'investors') => {
+  const handleNavigate = (view: 'home' | 'store' | 'investors' | 'about') => {
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -56,7 +57,8 @@ const App: React.FC = () => {
             <Hero onNavigate={handleNavigate} />
             
             {/* Introduction Section - Luxury White (Mysterious/Premium) */}
-            <section className="py-24 bg-white text-center px-6 reveal">
+            {/* Adjusted negative margin to meet bubble without cutting it */}
+            <section className="pt-0 pb-12 md:pb-16 bg-white text-center px-6 reveal -mt-4 md:-mt-10 relative z-20">
                 <div className="max-w-2xl mx-auto">
                     <span className="block text-[10px] font-bold tracking-[0.3em] uppercase text-gray-400 mb-6">The Revolution</span>
                     <h2 className="text-2xl md:text-3xl font-display font-normal mb-8 text-gray-900 leading-snug">
@@ -64,356 +66,278 @@ const App: React.FC = () => {
                     </h2>
                     <p className="text-sm text-gray-500 leading-loose font-light tracking-wide">
                         S3Ts Pro 3.0 represents the pinnacle of post-silicon engineering. 
-                        Forged from aerospace titanium and powered by light itself. 
-                        <br className="hidden md:block" />
-                        No battery cycles. No bezels. <strong className="text-gray-900 font-medium">Free unlimited global internet connection.</strong> Just pure, holographic innovation.
+                        By eliminating the chemical battery and integrating the world's first 
+                        Neural Quantum Processor, we have created a device that is not just smart, 
+                        but alive.
+                        <br /><br />
+                        <strong>Free unlimited global internet connection.</strong>
                     </p>
                 </div>
             </section>
 
-            {/* Feature Grid - High Tech */}
-            <div className="reveal">
-              <ProductGrid 
-                title="High Tech" 
-                subtitle="Engineering beyond limits" 
-                products={PRODUCTS} 
-                onNavigate={handleNavigate}
-              />
-            </div>
-
-            {/* Feature Highlight: Facial Recognition - Split Layout */}
-            <section id="biometrics" className="py-24 bg-black border-y border-gray-900 reveal">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 items-center">
-                    
-                    {/* Image Section */}
-                    <div className="flex-1 w-full flex justify-center">
-                        <div className="relative w-full max-w-lg">
-                            <img 
-                                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts+_facial_recognition.jpg"
-                                alt="Neural Face ID" 
-                                className="w-full h-auto object-contain rounded-sm shadow-2xl shadow-zinc-900/20"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="flex-1 text-center md:text-left">
-                        <div className="flex justify-center md:justify-start mb-6">
-                            <ScanFace className="text-white" size={32} strokeWidth={1} />
-                        </div>
-                        <span className="text-gray-500 font-bold tracking-[0.3em] uppercase mb-4 block text-[10px]">Biometric Security</span>
-                        <h2 className="text-3xl md:text-4xl font-display text-white mb-6 leading-tight">Neural Face ID</h2>
-                        <p className="text-sm text-gray-400 mb-8 font-light tracking-wide leading-relaxed max-w-md mx-auto md:mx-0">
-                            3D facial reading technology mapped by the A2X Core. Unlock your world with a glance, even in absolute darkness. 
-                            The invisible sensor array adapts to your changing environment instantly.
-                        </p>
-                        <button 
-                            onClick={() => handleNavigate('store')}
-                            className="border border-white text-white px-8 py-3 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors duration-500"
-                        >
-                            View Specs
-                        </button>
-                    </div>
-
-                </div>
-            </section>
-
-            {/* Feature Highlight: Solar - Clean White */}
-            <section id="energy" className="py-32 bg-white reveal">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-20 items-center">
-                    <div className="flex-1 order-2 md:order-1">
-                        <div className="inline-block p-4 border border-black rounded-full mb-8">
-                            <Sun className="text-black" size={24} strokeWidth={1} />
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8 leading-tight">0% Lithium.<br/>100% Infinite.</h2>
-                        <p className="text-sm md:text-base text-gray-600 mb-8 font-light leading-relaxed">
-                            The S3Ts Pro 3.0 harvests energy from the solar system. Nano-optic receptors cover the entire titanium frame, converting ambient light into perpetual power.
-                        </p>
-                        <ul className="space-y-6 mb-10">
-                            <li className="flex items-center gap-4 text-gray-800 text-[10px] tracking-[0.2em] uppercase font-bold">
-                                <span className="w-8 h-[1px] bg-black"></span>
-                                Quantum Capacitor Reserve
-                            </li>
-                            <li className="flex items-center gap-4 text-gray-800 text-[10px] tracking-[0.2em] uppercase font-bold">
-                                <span className="w-8 h-[1px] bg-black"></span>
-                                Near-infinite lifespan
-                            </li>
-                            <li className="flex items-center gap-4 text-gray-800 text-[10px] tracking-[0.2em] uppercase font-bold">
-                                <span className="w-8 h-[1px] bg-black"></span>
-                                Eco-friendly Structure
-                            </li>
-                        </ul>
-                        <button 
-                            onClick={() => handleNavigate('store')}
-                            className="text-[10px] font-bold tracking-widest uppercase border-b border-black pb-1 hover:text-gray-600 hover:border-gray-600 transition-all"
-                        >
-                            Explore Energy Specs
-                        </button>
-                    </div>
-                    <div className="flex-1 order-1 md:order-2 flex justify-center">
-                        <div className="w-full max-w-lg overflow-hidden relative">
-                            <img 
-                                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts+_nolithium.jpg" 
-                                alt="Solar Technology" 
-                                className="w-full h-auto object-contain hover:scale-105 transition-all duration-1000"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Specs & AI - Technical Black */}
-            <section id="ai" className="py-32 bg-zinc-900 text-white reveal">
+            {/* Neural/Biometrics Section - Luxury Black */}
+            <section id="ai" className="py-10 md:py-12 bg-black text-white reveal overflow-hidden">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-                    <div className="text-center mb-20">
-                        <h2 className="text-3xl md:text-4xl font-display mb-6">Neural Core A2X</h2>
-                        <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base font-light leading-loose">
-                            The world's first fully voice-operated device. 48 AI cores process your intent before you even finish speaking.
-                        </p>
+                   <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+                       {/* Left: Content */}
+                       <div className="flex-1 text-center md:text-left order-2 md:order-1">
+                          <span className="block text-blue-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-4 animate-pulse">
+                              Biometric Security
+                          </span>
+                          <h2 className="text-3xl md:text-5xl font-display mb-6">Neural Recognition</h2>
+                          <p className="text-gray-400 text-sm leading-relaxed font-light tracking-wide max-w-md mx-auto md:mx-0">
+                              Advanced 3D facial mapping combined with voice-print analysis creates an impenetrable security layer. 
+                              Unlock your world with a glance or a whisper.
+                          </p>
+                       </div>
+
+                       {/* Right: Image */}
+                       <div className="flex-1 flex justify-center md:justify-end order-1 md:order-2">
+                           <div className="relative w-full flex justify-center md:justify-end">
+                                <img 
+                                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_bg_removed_facial_recognition.png" 
+                                    alt="S3Ts Neural Face ID" 
+                                    className="h-64 md:h-96 w-auto object-contain drop-shadow-2xl opacity-90"
+                                />
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </section>
+
+             {/* Energy Section - Split Layout */}
+             <section id="energy" className="min-h-[80vh] flex flex-col md:flex-row bg-white reveal">
+                <div className="flex-1 relative min-h-[400px]">
+                    <img 
+                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts+_nolithium.jpg" 
+                        alt="Nano-Optic Solar" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+                </div>
+                <div className="flex-1 flex flex-col justify-center p-12 md:p-24 bg-zinc-50">
+                    <span className="block text-amber-600 text-[10px] font-bold tracking-[0.3em] uppercase mb-6">Infinite Energy</span>
+                    <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">0% Lithium.<br/>100% Light.</h2>
+                    <p className="text-sm text-gray-600 leading-loose font-light tracking-wide mb-8">
+                        The first smartphone powered entirely by light. Our nano-optic solar skin harvests energy 
+                        from any source—sunlight or indoor lamps—storing it in a non-degradable quantum capacitor. 
+                        No cables. No charging bricks. Just pure, infinite energy.
+                    </p>
+                    <div className="flex gap-8">
+                        <div>
+                            <span className="block text-3xl font-display text-gray-900">∞</span>
+                            <span className="text-[10px] uppercase tracking-widest text-gray-500">Lifespan</span>
+                        </div>
+                        <div>
+                            <span className="block text-3xl font-display text-gray-900">72h</span>
+                            <span className="text-[10px] uppercase tracking-widest text-gray-500">Reserve</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* High Tech Specs - Black Grid */}
+            <section className="py-24 bg-black text-white reveal">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+                     <div className="text-center mb-20">
+                        <h2 className="text-3xl md:text-4xl font-display mb-4">High Tech</h2>
+                        <p className="text-gray-500 text-xs tracking-[0.2em] uppercase">Engineering Masterpieces</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-800 border border-zinc-800">
-                        <div className="bg-zinc-900 p-10 hover:bg-zinc-800/50 transition-colors group text-center md:text-left">
-                            <Cpu className="text-gray-500 group-hover:text-white mb-8 mx-auto md:mx-0 transition-colors" size={32} strokeWidth={1} />
-                            <h3 className="text-base font-bold mb-2 tracking-wide uppercase">48 AI Cores</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">14nm Quantum Neural Threads for instant on-device computation.</p>
-                        </div>
-                        
-                        {/* Clickable S3Ts Chat Block */}
-                        <div 
-                            onClick={() => setActiveInfoModal('chat')}
-                            className="bg-zinc-900 p-10 hover:bg-zinc-800 cursor-pointer transition-colors group text-center md:text-left relative"
-                        >
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest text-gray-500">
-                                Click Info
-                            </div>
-                            <img 
-                                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" 
-                                alt="S3Ts Chat"
-                                className="w-10 h-10 mb-8 mx-auto md:mx-0 rounded-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 shadow-lg"
-                            />
-                            <h3 className="text-base font-bold mb-2 tracking-wide uppercase group-hover:underline decoration-1 underline-offset-4">S3Ts Chat</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">Encrypted internal messaging with WhatsApp AI Bridge capability.</p>
-                        </div>
-
-                        {/* Quantum-Link / Satellite Internet - Clickable */}
-                        <div 
-                            onClick={() => setActiveInfoModal('quantum')}
-                            className="bg-zinc-900 p-10 hover:bg-zinc-800 cursor-pointer transition-colors group text-center md:text-left relative"
-                        >
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest text-gray-500">
-                                Click Info
-                            </div>
-                            <Satellite className="text-gray-500 group-hover:text-white mb-8 mx-auto md:mx-0 transition-colors" size={32} strokeWidth={1} />
-                            <h3 className="text-base font-bold mb-2 tracking-wide uppercase group-hover:underline decoration-1 underline-offset-4">Quantum-Link</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                         {/* Card 1: Titanium */}
+                        <div className="border border-white/10 p-8 hover:border-white/30 transition-colors group">
+                            <Cpu className="text-gray-400 mb-6 group-hover:text-white transition-colors" size={32} strokeWidth={1} />
+                            <h3 className="text-lg font-display mb-2">Neural Core A2X</h3>
                             <p className="text-gray-500 text-xs leading-relaxed">
-                                Unlimited Satellite Connectivity. Included for life. No SIM. No Fees.
+                                48-Core AI processor capable of 100 trillion operations per second.
+                            </p>
+                        </div>
+                         
+                         {/* Card 2: Quantum Link (Clickable) */}
+                        <div 
+                            className="border border-white/10 p-8 hover:border-white/30 transition-colors group cursor-pointer relative"
+                            onClick={() => setActiveInfoModal('quantum')}
+                        >
+                            <span className="absolute top-4 right-4 text-[10px] text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
+                                Click Info
+                            </span>
+                            <Satellite className="text-gray-400 mb-6 group-hover:text-blue-400 transition-colors" size={32} strokeWidth={1} />
+                            <h3 className="text-lg font-display mb-2">Quantum-Link™</h3>
+                            <p className="text-gray-500 text-xs leading-relaxed">
+                                Free unlimited global satellite internet. No SIM. No fees.
                             </p>
                         </div>
 
-                        <div className="bg-zinc-900 p-10 hover:bg-zinc-800/50 transition-colors group text-center md:text-left">
-                            <div className="text-3xl font-display text-white mb-8 group-hover:scale-110 transition-transform origin-left">300MP</div>
-                            <h3 className="text-base font-bold mb-2 tracking-wide uppercase">HOLO-Lens</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">Quantum Sensor with Night Vision IR Mode.</p>
+                         {/* Card 3: Holographic */}
+                        <div className="border border-white/10 p-8 hover:border-white/30 transition-colors group">
+                            <ScanFace className="text-gray-400 mb-6 group-hover:text-white transition-colors" size={32} strokeWidth={1} />
+                            <h3 className="text-lg font-display mb-2">HOLO-Beam 3D</h3>
+                            <p className="text-gray-500 text-xs leading-relaxed">
+                                180° Projective display engine for glasses-free holographic AR.
+                            </p>
+                        </div>
+
+                        {/* Card 4: S3Ts Chat (Clickable) */}
+                        <div 
+                            className="border border-white/10 p-8 hover:border-white/30 transition-colors group cursor-pointer relative"
+                            onClick={() => setActiveInfoModal('chat')}
+                        >
+                            <span className="absolute top-4 right-4 text-[10px] text-green-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
+                                Click Info
+                            </span>
+                            {/* S3Ts Chat Logo */}
+                            <div className="mb-6 w-8 h-8 rounded-full overflow-hidden bg-black border border-gray-700 group-hover:border-green-400/50 transition-colors">
+                                <img 
+                                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" 
+                                    alt="S3Ts Chat"
+                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                />
+                            </div>
+                            <h3 className="text-lg font-display mb-2">S3Ts Chat</h3>
+                            <p className="text-gray-500 text-xs leading-relaxed">
+                                The future of communication. Holographic. Encrypted. Universal.
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            {/* Founder / Manifesto Section */}
-            <section className="py-24 bg-gray-50 reveal">
-                <div className="max-w-[1000px] mx-auto px-6 text-center">
-                     <div className="mb-6 flex justify-center">
-                        <Award className="text-gray-400" size={32} strokeWidth={1} />
-                     </div>
-                     <h2 className="text-2xl font-display text-gray-900 mb-8 tracking-wide">The Vision & Origin</h2>
-                     <p className="text-sm md:text-base text-gray-600 font-light leading-loose tracking-wide mb-8">
-                        The S3Ts Pro 3.0 is a product of the collective brilliance and dedication of our world-class engineers, scientists, and designers at <strong>S3Ts Tech</strong>. 
-                        As a premium Saudi Arabian technology corporation, we pride ourselves on pushing the boundaries of innovation. 
-                     </p>
-                     <p className="text-sm md:text-base text-gray-600 font-light leading-loose tracking-wide mb-8">
-                        This wonder is not the work of a single individual, but rather a testament to the collaborative spirit and cutting-edge expertise that defines <strong>Saudi Innovation</strong> on the global stage. 
-                        It is the culmination of years of research and development by a team committed to revolutionizing personal technology.
-                     </p>
-                     <div className="border-t border-gray-200 w-24 mx-auto mb-8"></div>
-                     <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-900">
-                        Invented & Founded by<br/>
-                        <span className="text-base font-display normal-case mt-2 block">Abdelwahid Habibullah Adam Banu Hashim</span>
-                     </p>
-                </div>
-            </section>
 
-            {/* Pre-order Banner - Minimalist */}
-            <section className="py-32 bg-white text-center border-t border-gray-100 reveal">
-                <div className="max-w-2xl mx-auto px-6">
-                    <h2 className="text-4xl md:text-5xl font-display mb-8 text-gray-900">Own the Future.</h2>
-                    <p className="text-sm md:text-base mb-12 text-gray-500 font-light tracking-wide">Pre-orders for S3Ts Pro 3.0 are now open.<br/>Limited titanium production run.</p>
-                    <button 
-                        onClick={() => handleNavigate('store')}
-                        className="bg-black text-white px-12 py-5 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 transition-colors shadow-2xl"
-                    >
-                        Pre-Order Now
-                    </button>
-                </div>
-            </section>
           </>
         )}
 
-        {currentView === 'store' && (
-          <StorePage onAddToCart={handleAddToCart} />
-        )}
+        {currentView === 'store' && <StorePage onAddToCart={handleAddToCart} />}
+        {currentView === 'investors' && <InvestorsPage />}
+        {currentView === 'about' && <AboutPage onNavigate={handleNavigate} />}
 
-        {currentView === 'investors' && (
-          <InvestorsPage />
-        )}
-      </main>
+        {/* --- MODALS --- */}
 
-      <Footer onNavigate={handleNavigate} />
-      <ChatSupport />
+        {/* 1. S3Ts Chat Modal */}
+        {activeInfoModal === 'chat' && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setActiveInfoModal(null)}></div>
+                <div className="bg-zinc-900 border border-white/10 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up text-white">
+                    <div className="sticky top-0 right-0 z-10 flex justify-end p-4 bg-zinc-900/90 backdrop-blur-sm">
+                        <button 
+                            onClick={() => setActiveInfoModal(null)}
+                            className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                        >
+                            <X size={20} className="text-white" />
+                        </button>
+                    </div>
 
-      {/* Info Modals */}
-      {activeInfoModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-            <div 
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-                onClick={() => setActiveInfoModal(null)}
-            ></div>
-            <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up">
-                <button 
-                    onClick={() => setActiveInfoModal(null)}
-                    className="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
-                  >
-                    <X size={24} />
-                </button>
-                
-                {/* S3Ts Chat Content */}
-                {activeInfoModal === 'chat' && (
-                    <div className="p-8 md:p-16">
-                        <div className="text-center mb-12">
-                            <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden shadow-xl border border-gray-100">
-                                <img 
+                    <div className="p-8 pt-0">
+                        <div className="flex flex-col items-center mb-10 text-center">
+                            <div className="w-20 h-20 rounded-2xl overflow-hidden mb-6 shadow-lg shadow-green-900/20">
+                                 <img 
                                     src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" 
-                                    alt="S3Ts Chat Logo" 
+                                    alt="S3Ts Chat"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-4">S3Ts Chat</h2>
-                            <p className="text-xs font-bold tracking-[0.2em] uppercase text-gray-400">The Future of Communication</p>
+                            <h2 className="text-2xl font-display mb-2">S3Ts Chat</h2>
+                            <p className="text-green-400 text-xs uppercase tracking-widest">The Future of Communication</p>
                         </div>
 
-                        <div className="max-w-3xl mx-auto text-center mb-16">
-                             <p className="text-base md:text-lg text-gray-800 font-light leading-loose mb-8">
-                                Faster than iMessage. Freer than WhatsApp. More secure than Signal.
-                                <br/>
-                                S3Ts Chat is the first holographic communication platform in the world, developed exclusively for the S3Ts Pro 3.0.
-                            </p>
-                            <p className="text-sm text-gray-500 font-light leading-relaxed">
-                                Thanks to the integrated AI engine and our ultra-fast S3Ts-to-S3Ts protocol, messages, calls, and holograms are transmitted in under 50 milliseconds.
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16">
-                            <div className="p-6 border border-gray-100 hover:border-black transition-colors duration-300">
-                                 <Box className="mb-4 text-black" size={24} strokeWidth={1} />
-                                 <h3 className="text-base font-display font-medium mb-2">HOLO-Messages</h3>
-                                 <p className="text-xs text-gray-500 leading-relaxed font-light">
-                                    Send genuine 3D messages that project as floating holograms above the device.
-                                 </p>
-                            </div>
-                            <div className="p-6 border border-gray-100 hover:border-black transition-colors duration-300">
-                                 <Mic className="mb-4 text-black" size={24} strokeWidth={1} />
-                                 <h3 className="text-base font-display font-medium mb-2">Voice Control Supreme</h3>
-                                 <p className="text-xs text-gray-500 leading-relaxed font-light">
-                                    Dictate messages, launch apps, call contacts, or write on WhatsApp simply with your voice.
-                                 </p>
-                            </div>
-                            <div className="p-6 border border-gray-100 hover:border-black transition-colors duration-300">
-                                 <Globe className="mb-4 text-black" size={24} strokeWidth={1} />
-                                 <h3 className="text-base font-display font-medium mb-2">Universal Bridge</h3>
-                                 <p className="text-xs text-gray-500 leading-relaxed font-light">
-                                    S3Ts Chat can communicate with WhatsApp, SMS, RCS, and any number — even without installing external apps.
-                                 </p>
-                            </div>
-                            <div className="p-6 border border-gray-100 hover:border-black transition-colors duration-300">
-                                 <ShieldCheck className="mb-4 text-black" size={24} strokeWidth={1} />
-                                 <h3 className="text-base font-display font-medium mb-2">Advanced Security</h3>
-                                 <p className="text-xs text-gray-500 leading-relaxed font-light">
-                                    Local encryption, secure auto-delete, and AI anti-screenshot protection for every conversation.
-                                 </p>
-                            </div>
-                        </div>
-
-                        <div className="text-center border-t border-gray-100 pt-12">
-                            <p className="text-sm font-medium tracking-widest uppercase text-gray-900 mb-2">
-                                S3Ts Chat is not an app.
-                            </p>
-                            <p className="text-sm font-light tracking-wide text-gray-500">
-                                It is a new dimension of communication.
-                            </p>
-                        </div>
-                    </div>
-                )}
-
-                {/* Quantum-Link Content */}
-                {activeInfoModal === 'quantum' && (
-                    <div className="p-8 md:p-16">
-                        <div className="text-center mb-12">
-                            <div className="inline-flex items-center justify-center p-4 border border-black rounded-full mb-6">
-                                <Satellite className="text-black" size={32} strokeWidth={1} />
-                            </div>
-                            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-4">Quantum-Link™</h2>
-                            <p className="text-xs font-bold tracking-[0.2em] uppercase text-gray-400">Universal Connectivity</p>
-                        </div>
-
-                        <div className="max-w-3xl mx-auto text-center mb-16">
-                             <p className="text-lg md:text-xl text-gray-900 font-light leading-relaxed mb-10">
-                                The S3Ts Pro 3.0 integrates <span className="font-medium">Quantum-Link™</span>, a hybrid mobile-satellite connectivity system included for life.
+                        <div className="space-y-8 text-sm font-light text-gray-300 leading-relaxed">
+                            <p className="italic text-center text-gray-400 border-b border-white/10 pb-6">
+                                "Faster than iMessage. Freer than WhatsApp. More secure than Signal."
                             </p>
                             
-                            <div className="flex flex-col md:flex-row justify-center gap-8 mb-10">
-                                <div className="flex flex-col items-center gap-3">
-                                    <div className="w-12 h-1 bg-black"></div>
-                                    <p className="text-sm font-bold uppercase tracking-widest">No SIM Card</p>
+                            <div className="space-y-6">
+                                <div className="flex gap-4">
+                                    <Box className="text-white shrink-0" size={20} />
+                                    <div>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">HOLO-Messages</h4>
+                                        <p>Send real 3D messages that project as holograms above the device.</p>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col items-center gap-3">
-                                    <div className="w-12 h-1 bg-black"></div>
-                                    <p className="text-sm font-bold uppercase tracking-widest">No Subscription</p>
+                                <div className="flex gap-4">
+                                    <Mic className="text-white shrink-0" size={20} />
+                                    <div>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Voice Control Supreme</h4>
+                                        <p>Send messages, open apps, or write on WhatsApp purely with your voice.</p>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col items-center gap-3">
-                                    <div className="w-12 h-1 bg-black"></div>
-                                    <p className="text-sm font-bold uppercase tracking-widest">No Future Fees</p>
+                                <div className="flex gap-4">
+                                    <Globe className="text-white shrink-0" size={20} />
+                                    <div>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Universal Bridge</h4>
+                                        <p>Communicate with WhatsApp, SMS, RCS, and any number without installing external apps.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <ShieldCheck className="text-white shrink-0" size={20} />
+                                    <div>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Ultimate Security</h4>
+                                        <p>Local encryption, secure auto-delete, and anti-screenshot AI.</p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <p className="text-base text-gray-500 font-light leading-loose">
-                                Your phone is connected anywhere on Earth the moment you turn it on. 
-                                Whether you are in the middle of the ocean, the Sahara desert, or the highest peaks, 
-                                Quantum-Link guarantees you high-speed 6G internet access.
-                            </p>
-                        </div>
-
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8">
-                            <div className="p-6 bg-gray-50 border border-transparent hover:border-gray-200 transition-colors">
-                                 <Radio className="mb-4 text-black" size={24} strokeWidth={1} />
-                                 <h3 className="text-base font-display font-medium mb-2">Hybrid Network</h3>
-                                 <p className="text-xs text-gray-500 leading-relaxed font-light">
-                                    Seamlessly switches between local towers and Low Earth Orbit satellites without interruption.
-                                 </p>
-                            </div>
-                            <div className="p-6 bg-gray-50 border border-transparent hover:border-gray-200 transition-colors">
-                                 <MapPin className="mb-4 text-black" size={24} strokeWidth={1} />
-                                 <h3 className="text-base font-display font-medium mb-2">100% Earth Coverage</h3>
-                                 <p className="text-xs text-gray-500 leading-relaxed font-light">
-                                    True global roaming capability built directly into the titanium chassis.
-                                 </p>
+                            
+                            <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                                <p className="text-xs text-gray-500 uppercase tracking-widest">Available only on S3Ts Pro 3.0</p>
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
             </div>
-        </div>
-      )}
+        )}
 
+        {/* 2. Quantum-Link Modal */}
+        {activeInfoModal === 'quantum' && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setActiveInfoModal(null)}></div>
+                <div className="bg-zinc-900 border border-white/10 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up text-white">
+                    <div className="sticky top-0 right-0 z-10 flex justify-end p-4 bg-zinc-900/90 backdrop-blur-sm">
+                        <button 
+                            onClick={() => setActiveInfoModal(null)}
+                            className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                        >
+                            <X size={20} className="text-white" />
+                        </button>
+                    </div>
+
+                    <div className="p-8 pt-0">
+                        <div className="flex flex-col items-center mb-10 text-center">
+                            <Satellite size={48} className="text-blue-400 mb-6" strokeWidth={1} />
+                            <h2 className="text-2xl font-display mb-2">Quantum-Link™</h2>
+                            <p className="text-blue-400 text-xs uppercase tracking-widest">Global Satellite Connectivity</p>
+                        </div>
+
+                        <div className="space-y-6 text-sm font-light text-gray-300 leading-relaxed text-center">
+                            <p>
+                                The S3Ts Pro 3.0 integrates <strong>Quantum-Link™</strong>, a hybrid mobile-satellite connectivity system included for life.
+                            </p>
+                            <div className="bg-blue-900/20 border border-blue-500/20 p-6 rounded-lg my-6">
+                                <ul className="space-y-4 text-left">
+                                    <li className="flex items-center gap-3">
+                                        <Check size={16} className="text-blue-400" />
+                                        <span>No SIM card required.</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <Check size={16} className="text-blue-400" />
+                                        <span>No subscription.</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <Check size={16} className="text-blue-400" />
+                                        <span>No future fees.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p>
+                                Your phone is connected anywhere on Earth the moment you turn it on. Oceans, deserts, or mountains—you are never offline.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )}
+
+      </main>
+
+      {currentView === 'home' && <Footer onNavigate={handleNavigate} />}
+      
+      <ChatSupport />
     </div>
   );
 };

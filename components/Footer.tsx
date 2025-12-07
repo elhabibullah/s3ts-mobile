@@ -2,7 +2,7 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, ChevronDown } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (view: 'home' | 'store' | 'investors') => void;
+  onNavigate: (view: 'home' | 'store' | 'investors' | 'about') => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
@@ -18,6 +18,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     } else if (linkName === 'Pro 3.0') {
       onNavigate('store');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (linkName === 'About Us') {
+      onNavigate('about');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // For demo purposes for other links
       console.log(`Navigating to ${linkName}`);
@@ -27,7 +30,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const footerLinks = {
     'S3Ts Products': ['Pro 3.0', 'Pro 3.0 Transparent', 'Holo-Headset', 'Solar Case'],
     'Support': ['Concierge', 'Service Centers', 'Contact Us', 'Recycling', 'Authentication'],
-    'Explore': ['Neural OS', 'Manifesto', 'Sustainability', 'Investors', 'Press'],
+    'Explore': ['About Us', 'Neural OS', 'Manifesto', 'Sustainability', 'Investors', 'Press'],
     'Legal': ['Privacy', 'Terms', 'Warranty']
   };
 
