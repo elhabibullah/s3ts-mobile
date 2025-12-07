@@ -144,9 +144,15 @@ const App: React.FC = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                         {/* Card 1: Titanium */}
+                         {/* Card 1: Titanium / Neural Core */}
                         <div className="border border-white/10 p-8 hover:border-white/30 transition-colors group">
-                            <Cpu className="text-gray-400 mb-6 group-hover:text-white transition-colors" size={32} strokeWidth={1} />
+                            <div className="mb-6 h-12 flex items-center">
+                                <img 
+                                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Neural-Core_transparent.png" 
+                                    alt="Neural Core" 
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
                             <h3 className="text-lg font-display mb-2">Neural Core A2X</h3>
                             <p className="text-gray-500 text-xs leading-relaxed">
                                 48-Core AI processor capable of 100 trillion operations per second.
@@ -161,7 +167,13 @@ const App: React.FC = () => {
                             <span className="absolute top-4 right-4 text-[10px] text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
                                 Click Info
                             </span>
-                            <Satellite className="text-gray-400 mb-6 group-hover:text-blue-400 transition-colors" size={32} strokeWidth={1} />
+                             <div className="mb-6 h-12 flex items-center">
+                                <img 
+                                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/quantum_link_transparent.png" 
+                                    alt="Quantum Link" 
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
                             <h3 className="text-lg font-display mb-2">Quantum-Link™</h3>
                             <p className="text-gray-500 text-xs leading-relaxed">
                                 Free unlimited global satellite internet. No SIM. No fees.
@@ -170,7 +182,13 @@ const App: React.FC = () => {
 
                          {/* Card 3: Holographic */}
                         <div className="border border-white/10 p-8 hover:border-white/30 transition-colors group">
-                            <ScanFace className="text-gray-400 mb-6 group-hover:text-white transition-colors" size={32} strokeWidth={1} />
+                             <div className="mb-6 h-12 flex items-center">
+                                <img 
+                                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Holobeam_3D.png" 
+                                    alt="HOLO-Beam" 
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
                             <h3 className="text-lg font-display mb-2">HOLO-Beam 3D</h3>
                             <p className="text-gray-500 text-xs leading-relaxed">
                                 180° Projective display engine for glasses-free holographic AR.
@@ -190,7 +208,7 @@ const App: React.FC = () => {
                                 <img 
                                     src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" 
                                     alt="S3Ts Chat"
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                                    className="w-full h-full object-cover grayscale-0 transition-all duration-500"
                                 />
                             </div>
                             <h3 className="text-lg font-display mb-2">S3Ts Chat</h3>
@@ -299,7 +317,13 @@ const App: React.FC = () => {
 
                     <div className="p-8 pt-0">
                         <div className="flex flex-col items-center mb-10 text-center">
-                            <Satellite size={48} className="text-blue-400 mb-6" strokeWidth={1} />
+                             <div className="mb-6 h-20 flex items-center justify-center">
+                                <img 
+                                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/quantum_link_transparent.png" 
+                                    alt="Quantum Link" 
+                                    className="h-full w-auto object-contain"
+                                />
+                            </div>
                             <h2 className="text-2xl font-display mb-2">Quantum-Link™</h2>
                             <p className="text-blue-400 text-xs uppercase tracking-widest">Global Satellite Connectivity</p>
                         </div>

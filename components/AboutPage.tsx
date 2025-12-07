@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, ArrowLeft, HeartHandshake } from 'lucide-react';
+import { ArrowLeft, HeartHandshake } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (view: 'home') => void;
@@ -20,7 +20,23 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </button>
         </div>
 
-        <Award size={48} className="mx-auto mb-8 text-black" strokeWidth={1} />
+        {/* Custom Gold/Blue Medal Icon */}
+        <div className="mx-auto mb-8 flex justify-center">
+            <svg 
+                width="48" 
+                height="48" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                {/* Ribbon (Under) - Blue */}
+                <path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88" className="fill-blue-600 stroke-blue-600" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+                {/* Main Circle - Black Outline, White Fill */}
+                <circle cx="12" cy="8" r="7" className="stroke-black fill-white" strokeWidth="1" />
+                {/* Middle Circle - Gold */}
+                <circle cx="12" cy="8" r="3.5" className="fill-yellow-500 stroke-none" />
+            </svg>
+        </div>
         
         <h1 className="text-3xl md:text-5xl font-display mb-6 text-gray-900">About S3Ts Tech</h1>
         <p className="text-gray-500 text-xs uppercase tracking-[0.2em] mb-12">The Future of Ethical Innovation</p>
@@ -42,7 +58,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="bg-gray-50 p-8 md:p-12 border border-gray-100">
-                <HeartHandshake size={32} className="mx-auto mb-6 text-gray-400" strokeWidth={1} />
+                <HeartHandshake size={40} className="mx-auto mb-6 text-red-500" strokeWidth={1} />
                 <h3 className="text-lg font-display mb-6 text-black">A Vision for Humanity</h3>
                 <p className="mb-6">
                     S3Ts Tech is driven by a mission to propel Saudi Arabia to the zenith of global leadership—not just economically, but humanly. 
