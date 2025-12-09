@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '../types';
+import { Product, Language } from '../types';
 
 interface ProductGridProps {
   title: string;
@@ -7,16 +7,19 @@ interface ProductGridProps {
   products: Product[];
   bgColor?: string;
   onNavigate: (view: 'home' | 'store') => void;
+  language?: Language;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ title, subtitle, products, bgColor = "bg-white", onNavigate }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ title, subtitle, products, bgColor = "bg-white", onNavigate, language = 'en' }) => {
+  const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
+  
   return (
-    <section className={`py-20 md:py-32 ${bgColor} reveal`}>
+    <section className={`py-20 md:py-32 ${bgColor} reveal`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         
         {/* Header */}
         <div className="text-center mb-16 md:mb-24">
-            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-4 tracking-wide">{title}</h2>
+            <h2 className={`text-3xl md:text-4xl text-gray-900 mb-4 tracking-wide ${displayFont}`}>{title}</h2>
             {subtitle && <p className="text-gray-500 font-light text-sm md:text-base tracking-wide uppercase">{subtitle}</p>}
         </div>
 
@@ -30,7 +33,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, subtitle, products, bg
                 >
                     {/* Badge */}
                     {product.isNew && (
-                        <span className="absolute top-4 left-4 bg-black text-white text-[10px] font-bold px-3 py-1 tracking-widest z-10">
+                        <span className={`absolute top-4 ${language === 'ar' ? 'right-4' : 'left-4'} bg-black text-white text-[10px] font-bold px-3 py-1 tracking-widest z-10`}>
                             NEW
                         </span>
                     )}
@@ -47,7 +50,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, subtitle, products, bg
 
                     {/* Content */}
                     <div className="text-center">
-                        <h3 className="text-xl font-display font-medium text-gray-900 mb-2">{product.name}</h3>
+                        <h3 className={`text-xl ${displayFont} text-gray-900 mb-2`}>{product.name}</h3>
                         <p className="text-gray-500 text-xs tracking-widest uppercase mb-6">{product.tagline}</p>
                         
                         <div className="flex justify-center">

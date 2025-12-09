@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { HERO_SLIDES } from '../constants';
+import { Language } from '../types';
 
 interface HeroProps {
     onNavigate: (view: 'home' | 'store') => void;
+    language: Language;
+    translations: any;
 }
 
-const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Auto-advance slider (only if multiple slides, otherwise keep static)
@@ -19,9 +22,13 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   }, []);
 
   const isVideo = (url: string) => url.endsWith('.mp4');
+  
+  // Font classes
+  const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
+  const textFont = language === 'ar' ? 'font-tajawal' : 'font-sans';
 
   return (
-    <div className="relative w-full overflow-hidden flex flex-col items-center pt-12 md:pt-16 pb-0 bg-white">
+    <div className="relative w-full overflow-hidden flex flex-col items-center pt-12 md:pt-16 pb-0 bg-white" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       {HERO_SLIDES.map((slide, index) => (
         <div
           key={slide.id}
@@ -31,17 +38,16 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         >
           
           {/* 1. Phone Image - Centered and Dominant */}
-          <div className="relative z-20 w-[90%] max-w-[500px] md:w-[750px] flex-shrink-0 mb-0">
+          <div className="relative z-20 w-[90%] max-w-[500px] md:w-[750px] flex-shrink-0 mb-0 -mb-16 md:-mb-32">
              <img 
                 src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-transparent-grey.png" 
                 alt="S3Ts Pro 3.0"
-                className="w-full h-auto drop-shadow-2xl object-contain"
+                className="w-full h-full object-contain drop-shadow-2xl"
               />
           </div>
 
           {/* 2. Bubble Container (Video Background + Text Foreground) */}
-          {/* MOVED HIGHER: Changed mt-1 to -mt-10 md:-mt-20 to pull it up */}
-          <div className="relative z-10 w-full flex flex-col items-center justify-center -mt-10 md:-mt-20 mb-[-80px] md:mb-[-250px]">
+          <div className="relative z-10 w-full flex flex-col items-center justify-center mt-1 md:mt-2 mb-[-50px] md:mb-[-200px]">
               
               {/* The Bubble (Video) */}
               <div className="relative w-[250%] md:w-[2200px] flex items-center justify-center">
@@ -59,18 +65,18 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
                  {/* Text - Centered inside bubble */}
                  <div className="absolute inset-0 flex flex-col items-center justify-center pt-24 md:pt-48">
-                    <h2 className="text-4xl md:text-8xl font-display font-medium tracking-wide mb-8 text-black drop-shadow-sm text-center">
-                      {slide.title}
+                    <h2 className={`text-4xl md:text-8xl ${displayFont} tracking-wide mb-8 text-black drop-shadow-sm text-center`}>
+                      {translations.hero_title}
                     </h2>
-                    <p className="hidden md:block text-xl font-light tracking-wide text-gray-800 mb-10 max-w-2xl mx-auto text-center">
-                      {slide.subtitle}
+                    <p className={`hidden md:block text-xl font-light tracking-wide text-gray-800 mb-10 max-w-2xl mx-auto text-center ${textFont}`}>
+                      {translations.hero_subtitle}
                     </p>
                     <div className="flex justify-center mt-4">
                         <button 
                             onClick={() => onNavigate('store')}
-                            className="bg-black text-white px-10 py-4 md:px-14 md:py-6 text-xs md:text-sm font-bold tracking-[0.25em] uppercase hover:bg-zinc-800 transition-all duration-300 shadow-2xl relative z-30"
+                            className={`bg-black text-white px-10 py-4 md:px-14 md:py-6 text-xs md:text-sm font-bold tracking-[0.25em] uppercase hover:bg-zinc-800 transition-all duration-300 shadow-2xl relative z-30 ${textFont}`}
                         >
-                            {slide.cta}
+                            {translations.hero_cta}
                         </button>
                     </div>
                  </div>

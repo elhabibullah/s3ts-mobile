@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -7,17 +8,29 @@ import ChatSupport from './components/ChatSupport';
 import StorePage from './components/StorePage';
 import InvestorsPage from './components/InvestorsPage';
 import AboutPage from './components/AboutPage';
-import { PRODUCTS } from './constants';
-import { Cpu, Sun, Smartphone, Wifi, ScanFace, Award, MessageSquare, Box, Mic, Globe, ShieldCheck, X, Satellite, Radio, MapPin, Check } from 'lucide-react';
+import S3TsChatWeb from './components/S3TsChatWeb';
+import { PRODUCTS, TRANSLATIONS } from './constants';
+import { Language } from './types';
+import { Check, Box, Mic, Globe, ShieldCheck, X, ExternalLink } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'store' | 'investors' | 'about'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'store' | 'investors' | 'about' | 'chat-web'>('home');
   const [cartCount, setCartCount] = useState(0);
   const [activeInfoModal, setActiveInfoModal] = useState<'chat' | 'quantum' | null>(null);
+  
+  // Language State
+  const [language, setLanguage] = useState<Language>('en');
+  const t = TRANSLATIONS[language]; // Current translation object
 
-  const handleNavigate = (view: 'home' | 'store' | 'investors' | 'about') => {
+  const handleNavigate = (view: 'home' | 'store' | 'investors' | 'about' | 'chat-web') => {
     setCurrentView(view);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (view !== 'chat-web') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'en' ? 'ar' : 'en');
   };
 
   const handleAddToCart = () => {
@@ -44,56 +57,60 @@ const App: React.FC = () => {
     }, 100);
 
     return () => observer.disconnect();
-  }, [currentView]); // Re-run when view changes to capture new elements
+  }, [currentView, language]); 
+
+  // Dynamic Fonts
+  const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
+  const textFont = language === 'ar' ? 'font-tajawal' : 'font-sans font-light';
+
+  // If we are in the Chat Web Interface, render full screen without standard layout
+  if (currentView === 'chat-web') {
+      return <S3TsChatWeb onNavigate={() => setCurrentView('home')} />;
+  }
 
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-black selection:text-white">
-      <Navbar onNavigate={handleNavigate} cartCount={cartCount} currentView={currentView} />
+    <div className={`min-h-screen bg-white text-gray-900 selection:bg-black selection:text-white ${language === 'ar' ? 'font-tajawal' : 'font-sans'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      <Navbar onNavigate={handleNavigate} cartCount={cartCount} currentView={currentView as any} language={language} translations={t} />
       
       {/* Main content with top padding to account for fixed navbar */}
       <main className="pt-16 md:pt-24">
         {currentView === 'home' && (
           <>
-            <Hero onNavigate={handleNavigate} />
+            <Hero onNavigate={handleNavigate} language={language} translations={t} />
             
-            {/* Introduction Section - Luxury White (Mysterious/Premium) */}
-            {/* Adjusted negative margin to meet bubble without cutting it */}
-            <section className="pt-0 pb-12 md:pb-16 bg-white text-center px-6 reveal -mt-4 md:-mt-10 relative z-20">
+            {/* Introduction Section */}
+            <section className="pt-0 pb-12 md:pb-16 bg-white text-center px-6 reveal -mt-12 md:-mt-20 relative z-20">
                 <div className="max-w-2xl mx-auto">
-                    <span className="block text-[10px] font-bold tracking-[0.3em] uppercase text-gray-400 mb-6">The Revolution</span>
-                    <h2 className="text-2xl md:text-3xl font-display font-normal mb-8 text-gray-900 leading-snug">
-                        The Impossible, <br/> Is Now Possible.
+                    <span className={`block text-[10px] font-bold tracking-[0.3em] uppercase text-gray-400 mb-6 ${textFont}`}>{t.intro_revolution}</span>
+                    <h2 className={`text-2xl md:text-3xl font-normal mb-8 text-gray-900 leading-snug ${displayFont}`}>
+                        {t.intro_title_1} <br/> {t.intro_title_2}
                     </h2>
-                    <p className="text-sm text-gray-500 leading-loose font-light tracking-wide">
-                        S3Ts Pro 3.0 represents the pinnacle of post-silicon engineering. 
-                        By eliminating the chemical battery and integrating the world's first 
-                        Neural Quantum Processor, we have created a device that is not just smart, 
-                        but alive.
+                    <p className={`text-sm text-gray-500 leading-loose tracking-wide ${textFont}`}>
+                        {t.intro_desc}
                         <br /><br />
-                        <strong>Free unlimited global internet connection.</strong>
+                        <strong>{t.intro_internet}</strong>
                     </p>
                 </div>
             </section>
 
-            {/* Neural/Biometrics Section - Luxury Black */}
+            {/* Neural/Biometrics Section */}
             <section id="ai" className="py-10 md:py-12 bg-black text-white reveal overflow-hidden">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12">
                    <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-                       {/* Left: Content */}
-                       <div className="flex-1 text-center md:text-left order-2 md:order-1">
-                          <span className="block text-blue-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-4 animate-pulse">
-                              Biometric Security
+                       {/* Content */}
+                       <div className={`flex-1 text-center ${language === 'ar' ? 'md:text-right' : 'md:text-left'} order-2 md:order-1`}>
+                          <span className={`block text-blue-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-4 animate-pulse ${textFont}`}>
+                              {t.bio_tag}
                           </span>
-                          <h2 className="text-3xl md:text-5xl font-display mb-6">Neural Recognition</h2>
-                          <p className="text-gray-400 text-sm leading-relaxed font-light tracking-wide max-w-md mx-auto md:mx-0">
-                              Advanced 3D facial mapping combined with voice-print analysis creates an impenetrable security layer. 
-                              Unlock your world with a glance or a whisper.
+                          <h2 className={`text-3xl md:text-5xl mb-6 ${displayFont}`}>{t.bio_title}</h2>
+                          <p className={`text-gray-400 text-sm leading-relaxed tracking-wide max-w-md mx-auto ${language === 'ar' ? 'md:mr-0' : 'md:ml-0'} ${textFont}`}>
+                              {t.bio_desc}
                           </p>
                        </div>
 
-                       {/* Right: Image */}
+                       {/* Image */}
                        <div className="flex-1 flex justify-center md:justify-end order-1 md:order-2">
-                           <div className="relative w-full flex justify-center md:justify-end">
+                           <div className={`relative w-full flex justify-center ${language === 'ar' ? 'md:justify-start' : 'md:justify-end'}`}>
                                 <img 
                                     src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_bg_removed_facial_recognition.png" 
                                     alt="S3Ts Neural Face ID" 
@@ -105,7 +122,7 @@ const App: React.FC = () => {
                 </div>
             </section>
 
-             {/* Energy Section - Split Layout */}
+             {/* Energy Section */}
              <section id="energy" className="min-h-[80vh] flex flex-col md:flex-row bg-white reveal">
                 <div className="flex-1 relative min-h-[400px]">
                     <img 
@@ -115,36 +132,34 @@ const App: React.FC = () => {
                     />
                 </div>
                 <div className="flex-1 flex flex-col justify-center p-12 md:p-24 bg-zinc-50">
-                    <span className="block text-amber-600 text-[10px] font-bold tracking-[0.3em] uppercase mb-6">Infinite Energy</span>
-                    <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">0% Lithium.<br/>100% Light.</h2>
-                    <p className="text-sm text-gray-600 leading-loose font-light tracking-wide mb-8">
-                        The first smartphone powered entirely by light. Our nano-optic solar skin harvests energy 
-                        from any source—sunlight or indoor lamps—storing it in a non-degradable quantum capacitor. 
-                        No cables. No charging bricks. Just pure, infinite energy.
+                    <span className={`block text-amber-600 text-[10px] font-bold tracking-[0.3em] uppercase mb-6 ${textFont}`}>{t.energy_tag}</span>
+                    <h2 className={`text-3xl md:text-5xl text-gray-900 mb-8 ${displayFont}`}>{t.energy_title}</h2>
+                    <p className={`text-sm text-gray-600 leading-loose tracking-wide mb-8 ${textFont}`}>
+                        {t.energy_desc}
                     </p>
                     <div className="flex gap-8">
                         <div>
-                            <span className="block text-3xl font-display text-gray-900">∞</span>
-                            <span className="text-[10px] uppercase tracking-widest text-gray-500">Lifespan</span>
+                            <span className={`block text-3xl text-gray-900 ${displayFont}`}>∞</span>
+                            <span className={`text-[10px] uppercase tracking-widest text-gray-500 ${textFont}`}>{t.energy_lifespan}</span>
                         </div>
                         <div>
-                            <span className="block text-3xl font-display text-gray-900">72h</span>
-                            <span className="text-[10px] uppercase tracking-widest text-gray-500">Reserve</span>
+                            <span className={`block text-3xl text-gray-900 ${displayFont}`}>72h</span>
+                            <span className={`text-[10px] uppercase tracking-widest text-gray-500 ${textFont}`}>{t.energy_reserve}</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* High Tech Specs - Black Grid */}
+            {/* High Tech Specs */}
             <section className="py-24 bg-black text-white reveal">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12">
                      <div className="text-center mb-20">
-                        <h2 className="text-3xl md:text-4xl font-display mb-4">High Tech</h2>
-                        <p className="text-gray-500 text-xs tracking-[0.2em] uppercase">Engineering Masterpieces</p>
+                        <h2 className={`text-3xl md:text-4xl mb-4 ${displayFont}`}>{t.tech_title}</h2>
+                        <p className={`text-gray-500 text-xs tracking-[0.2em] uppercase ${textFont}`}>{t.tech_subtitle}</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                         {/* Card 1: Titanium / Neural Core */}
+                         {/* Card 1: Neural Core */}
                         <div className="border border-white/10 p-8 hover:border-white/30 transition-colors group">
                             <div className="mb-6 h-12 flex items-center">
                                 <img 
@@ -153,19 +168,19 @@ const App: React.FC = () => {
                                     className="h-full w-auto object-contain"
                                 />
                             </div>
-                            <h3 className="text-lg font-display mb-2">Neural Core A2X</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">
-                                48-Core AI processor capable of 100 trillion operations per second.
+                            <h3 className={`text-lg mb-2 ${displayFont}`}>{t.tech_core}</h3>
+                            <p className={`text-gray-500 text-xs leading-relaxed ${textFont}`}>
+                                {t.tech_core_desc}
                             </p>
                         </div>
                          
-                         {/* Card 2: Quantum Link (Clickable) */}
+                         {/* Card 2: Quantum Link */}
                         <div 
                             className="border border-white/10 p-8 hover:border-white/30 transition-colors group cursor-pointer relative"
                             onClick={() => setActiveInfoModal('quantum')}
                         >
-                            <span className="absolute top-4 right-4 text-[10px] text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
-                                Click Info
+                            <span className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-[10px] text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest ${textFont}`}>
+                                {t.click_info}
                             </span>
                              <div className="mb-6 h-12 flex items-center">
                                 <img 
@@ -174,9 +189,9 @@ const App: React.FC = () => {
                                     className="h-full w-auto object-contain"
                                 />
                             </div>
-                            <h3 className="text-lg font-display mb-2">Quantum-Link™</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">
-                                Free unlimited global satellite internet. No SIM. No fees.
+                            <h3 className={`text-lg mb-2 ${displayFont}`}>{t.tech_quantum}</h3>
+                            <p className={`text-gray-500 text-xs leading-relaxed ${textFont}`}>
+                                {t.tech_quantum_desc}
                             </p>
                         </div>
 
@@ -189,31 +204,30 @@ const App: React.FC = () => {
                                     className="h-full w-auto object-contain"
                                 />
                             </div>
-                            <h3 className="text-lg font-display mb-2">HOLO-Beam 3D</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">
-                                180° Projective display engine for glasses-free holographic AR.
+                            <h3 className={`text-lg mb-2 ${displayFont}`}>{t.tech_holo}</h3>
+                            <p className={`text-gray-500 text-xs leading-relaxed ${textFont}`}>
+                                {t.tech_holo_desc}
                             </p>
                         </div>
 
-                        {/* Card 4: S3Ts Chat (Clickable) */}
+                        {/* Card 4: S3Ts Chat */}
                         <div 
                             className="border border-white/10 p-8 hover:border-white/30 transition-colors group cursor-pointer relative"
                             onClick={() => setActiveInfoModal('chat')}
                         >
-                            <span className="absolute top-4 right-4 text-[10px] text-green-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
-                                Click Info
+                            <span className={`absolute top-4 ${language === 'ar' ? 'left-4' : 'right-4'} text-[10px] text-green-400 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest ${textFont}`}>
+                                {t.click_info}
                             </span>
-                            {/* S3Ts Chat Logo */}
                             <div className="mb-6 w-8 h-8 rounded-full overflow-hidden bg-black border border-gray-700 group-hover:border-green-400/50 transition-colors">
                                 <img 
                                     src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" 
                                     alt="S3Ts Chat"
-                                    className="w-full h-full object-cover grayscale-0 transition-all duration-500"
+                                    className="w-full h-full object-cover transition-all duration-500"
                                 />
                             </div>
-                            <h3 className="text-lg font-display mb-2">S3Ts Chat</h3>
-                            <p className="text-gray-500 text-xs leading-relaxed">
-                                The future of communication. Holographic. Encrypted. Universal.
+                            <h3 className={`text-lg mb-2 ${displayFont}`}>{t.tech_chat}</h3>
+                            <p className={`text-gray-500 text-xs leading-relaxed ${textFont}`}>
+                                {t.tech_chat_desc}
                             </p>
                         </div>
                     </div>
@@ -223,9 +237,9 @@ const App: React.FC = () => {
           </>
         )}
 
-        {currentView === 'store' && <StorePage onAddToCart={handleAddToCart} />}
+        {currentView === 'store' && <StorePage onAddToCart={handleAddToCart} language={language} translations={t} />}
         {currentView === 'investors' && <InvestorsPage />}
-        {currentView === 'about' && <AboutPage onNavigate={handleNavigate} />}
+        {currentView === 'about' && <AboutPage onNavigate={handleNavigate} language={language} translations={t} />}
 
         {/* --- MODALS --- */}
 
@@ -233,8 +247,8 @@ const App: React.FC = () => {
         {activeInfoModal === 'chat' && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
                 <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setActiveInfoModal(null)}></div>
-                <div className="bg-zinc-900 border border-white/10 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up text-white">
-                    <div className="sticky top-0 right-0 z-10 flex justify-end p-4 bg-zinc-900/90 backdrop-blur-sm">
+                <div className="bg-zinc-900 border border-white/10 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up text-white" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    <div className={`sticky top-0 z-10 flex ${language === 'ar' ? 'justify-start' : 'justify-end'} p-4 bg-zinc-900/90 backdrop-blur-sm`}>
                         <button 
                             onClick={() => setActiveInfoModal(null)}
                             className="p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -252,48 +266,56 @@ const App: React.FC = () => {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <h2 className="text-2xl font-display mb-2">S3Ts Chat</h2>
-                            <p className="text-green-400 text-xs uppercase tracking-widest">The Future of Communication</p>
+                            <h2 className={`text-2xl mb-2 ${displayFont}`}>{t.tech_chat}</h2>
+                            <p className={`text-green-400 text-xs uppercase tracking-widest ${textFont}`}>{language === 'ar' ? 'مستقبل الاتصالات' : 'The Future of Communication'}</p>
+                            
+                            {/* Launch Button */}
+                            <button 
+                                onClick={() => { setActiveInfoModal(null); setCurrentView('chat-web'); }}
+                                className="mt-6 flex items-center gap-2 bg-teal-600 text-black px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-teal-500 transition-all shadow-lg shadow-teal-900/50"
+                            >
+                                {language === 'ar' ? 'تشغيل واجهة الويب' : 'Launch Web Interface'} <ExternalLink size={14} />
+                            </button>
                         </div>
 
-                        <div className="space-y-8 text-sm font-light text-gray-300 leading-relaxed">
+                        <div className={`space-y-8 text-sm font-light text-gray-300 leading-relaxed ${textFont}`}>
                             <p className="italic text-center text-gray-400 border-b border-white/10 pb-6">
-                                "Faster than iMessage. Freer than WhatsApp. More secure than Signal."
+                                {language === 'ar' ? '"أسرع من iMessage. أكثر حرية من WhatsApp. أكثر أماناً من Signal."' : '"Faster than iMessage. Freer than WhatsApp. More secure than Signal."'}
                             </p>
                             
                             <div className="space-y-6">
                                 <div className="flex gap-4">
                                     <Box className="text-white shrink-0" size={20} />
                                     <div>
-                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">HOLO-Messages</h4>
-                                        <p>Send real 3D messages that project as holograms above the device.</p>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">{language === 'ar' ? 'رسائل هولو' : 'HOLO-Messages'}</h4>
+                                        <p>{language === 'ar' ? 'أرسل رسائل ثلاثية الأبعاد حقيقية تُعرض كهولوغرام فوق الجهاز.' : 'Send real 3D messages that project as holograms above the device.'}</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <Mic className="text-white shrink-0" size={20} />
                                     <div>
-                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Voice Control Supreme</h4>
-                                        <p>Send messages, open apps, or write on WhatsApp purely with your voice.</p>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">{language === 'ar' ? 'التحكم الصوتي الفائق' : 'Voice Control Supreme'}</h4>
+                                        <p>{language === 'ar' ? 'أرسل الرسائل، وافتح التطبيقات، أو اكتب على واتساب بصوتك فقط.' : 'Send messages, open apps, or write on WhatsApp purely with your voice.'}</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <Globe className="text-white shrink-0" size={20} />
                                     <div>
-                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Universal Bridge</h4>
-                                        <p>Communicate with WhatsApp, SMS, RCS, and any number without installing external apps.</p>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">{language === 'ar' ? 'الجسر العالمي' : 'Universal Bridge'}</h4>
+                                        <p>{language === 'ar' ? 'تواصل مع واتساب، SMS، RCS، وأي رقم دون تثبيت تطبيقات خارجية.' : 'Communicate with WhatsApp, SMS, RCS, and any number without installing external apps.'}</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <ShieldCheck className="text-white shrink-0" size={20} />
                                     <div>
-                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Ultimate Security</h4>
-                                        <p>Local encryption, secure auto-delete, and anti-screenshot AI.</p>
+                                        <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">{language === 'ar' ? 'الأمان المطلق' : 'Ultimate Security'}</h4>
+                                        <p>{language === 'ar' ? 'تشفير محلي، حذف تلقائي آمن، وذكاء اصطناعي مضاد لتصوير الشاشة.' : 'Local encryption, secure auto-delete, and anti-screenshot AI.'}</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div className="mt-8 pt-6 border-t border-white/10 text-center">
-                                <p className="text-xs text-gray-500 uppercase tracking-widest">Available only on S3Ts Pro 3.0</p>
+                                <p className="text-xs text-gray-500 uppercase tracking-widest">{language === 'ar' ? 'متاح فقط على S3Ts Pro 3.0' : 'Available only on S3Ts Pro 3.0'}</p>
                             </div>
                         </div>
                     </div>
@@ -305,8 +327,8 @@ const App: React.FC = () => {
         {activeInfoModal === 'quantum' && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
                 <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setActiveInfoModal(null)}></div>
-                <div className="bg-zinc-900 border border-white/10 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up text-white">
-                    <div className="sticky top-0 right-0 z-10 flex justify-end p-4 bg-zinc-900/90 backdrop-blur-sm">
+                <div className="bg-zinc-900 border border-white/10 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up text-white" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                    <div className={`sticky top-0 z-10 flex ${language === 'ar' ? 'justify-start' : 'justify-end'} p-4 bg-zinc-900/90 backdrop-blur-sm`}>
                         <button 
                             onClick={() => setActiveInfoModal(null)}
                             className="p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -324,32 +346,32 @@ const App: React.FC = () => {
                                     className="h-full w-auto object-contain"
                                 />
                             </div>
-                            <h2 className="text-2xl font-display mb-2">Quantum-Link™</h2>
-                            <p className="text-blue-400 text-xs uppercase tracking-widest">Global Satellite Connectivity</p>
+                            <h2 className={`text-2xl mb-2 ${displayFont}`}>{t.tech_quantum}</h2>
+                            <p className={`text-blue-400 text-xs uppercase tracking-widest ${textFont}`}>{language === 'ar' ? 'اتصال فضائي عالمي' : 'Global Satellite Connectivity'}</p>
                         </div>
 
-                        <div className="space-y-6 text-sm font-light text-gray-300 leading-relaxed text-center">
+                        <div className={`space-y-6 text-sm font-light text-gray-300 leading-relaxed text-center ${textFont}`}>
                             <p>
-                                The S3Ts Pro 3.0 integrates <strong>Quantum-Link™</strong>, a hybrid mobile-satellite connectivity system included for life.
+                                {language === 'ar' ? 'يدمج S3Ts Pro 3.0 نظام Quantum-Link™، وهو نظام اتصال هجين بين الجوال والأقمار الصناعية مشمول مدى الحياة.' : 'The S3Ts Pro 3.0 integrates Quantum-Link™, a hybrid mobile-satellite connectivity system included for life.'}
                             </p>
                             <div className="bg-blue-900/20 border border-blue-500/20 p-6 rounded-lg my-6">
-                                <ul className="space-y-4 text-left">
+                                <ul className={`space-y-4 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                                     <li className="flex items-center gap-3">
                                         <Check size={16} className="text-blue-400" />
-                                        <span>No SIM card required.</span>
+                                        <span>{language === 'ar' ? 'لا حاجة لشريحة SIM.' : 'No SIM card required.'}</span>
                                     </li>
                                     <li className="flex items-center gap-3">
                                         <Check size={16} className="text-blue-400" />
-                                        <span>No subscription.</span>
+                                        <span>{language === 'ar' ? 'بدون اشتراك.' : 'No subscription.'}</span>
                                     </li>
                                     <li className="flex items-center gap-3">
                                         <Check size={16} className="text-blue-400" />
-                                        <span>No future fees.</span>
+                                        <span>{language === 'ar' ? 'لا رسوم مستقبلية.' : 'No future fees.'}</span>
                                     </li>
                                 </ul>
                             </div>
                             <p>
-                                Your phone is connected anywhere on Earth the moment you turn it on. Oceans, deserts, or mountains—you are never offline.
+                                {language === 'ar' ? 'هاتفك متصل في أي مكان على الأرض بمجرد تشغيله. المحيطات، الصحاري، أو الجبال - لن تكون أبداً خارج التغطية.' : 'Your phone is connected anywhere on Earth the moment you turn it on. Oceans, deserts, or mountains—you are never offline.'}
                             </p>
                         </div>
                     </div>
@@ -359,9 +381,9 @@ const App: React.FC = () => {
 
       </main>
 
-      {currentView === 'home' && <Footer onNavigate={handleNavigate} />}
+      {currentView === 'home' && <Footer onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} translations={t} />}
       
-      <ChatSupport />
+      <ChatSupport language={language} />
     </div>
   );
 };

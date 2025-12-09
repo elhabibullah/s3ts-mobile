@@ -5,16 +5,31 @@ import { ChatMessage, LoadingState } from '../types';
 import { Chat, GenerateContentResponse } from "@google/genai";
 import { VIVO_BLUE } from '../constants';
 
-const ChatSupport: React.FC = () => {
+interface ChatSupportProps {
+    language?: 'en' | 'ar';
+}
+
+const ChatSupport: React.FC<ChatSupportProps> = ({ language = 'en' }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const initialMsg = language === 'ar' 
+    ? 'مرحباً بكم في S3Ts Tech. أنا مساعد الاستفسارات الخاص بكم.'
+    : 'Welcome to S3Ts Tech. I am your Inquiry Assistant.';
+    
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: 'Welcome to S3Ts Tech. I am your Inquiry Assistant.' }
+    { role: 'model', text: initialMsg }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.IDLE);
   const [chatSession, setChatSession] = useState<Chat | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Re-update initial message if language changes and chat is reset
+  useEffect(() => {
+     if (messages.length === 1 && messages[0].role === 'model') {
+         setMessages([{ role: 'model', text: initialMsg }]);
+     }
+  }, [language]);
 
   useEffect(() => {
     if (isOpen && !chatSession) {
@@ -59,7 +74,7 @@ const ChatSupport: React.FC = () => {
         }
         setLoadingState(LoadingState.SUCCESS);
     } catch (error) {
-        setMessages(prev => [...prev, { role: 'model', text: "I'm having trouble connecting to the S3Ts Network. Please try again later." }]);
+        setMessages(prev => [...prev, { role: 'model', text: language === 'ar' ? "عذراً، أواجه مشكلة في الاتصال. يرجى المحاولة لاحقاً." : "I'm having trouble connecting to the S3Ts Network. Please try again later." }]);
         setLoadingState(LoadingState.ERROR);
     }
   };
@@ -67,6 +82,9 @@ const ChatSupport: React.FC = () => {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') handleSend();
   };
+
+  const fontClass = language === 'ar' ? 'font-tajawal' : 'font-sans';
+  const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
 
   return (
     <>
@@ -79,17 +97,19 @@ const ChatSupport: React.FC = () => {
       </button>
 
       {/* Chat Window */}
-      <div className={`fixed bottom-6 right-6 z-50 w-[90vw] md:w-[360px] h-[550px] max-h-[80vh] bg-white rounded-none shadow-2xl flex flex-col transition-all duration-500 origin-bottom-right transform border border-gray-100 ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 pointer-events-none'}`}>
+      <div className={`fixed bottom-6 right-6 z-50 w-[90vw] md:w-[360px] h-[550px] max-h-[80vh] bg-white rounded-none shadow-2xl flex flex-col transition-all duration-500 origin-bottom-right transform border border-gray-100 ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 pointer-events-none'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
         
         {/* Header */}
         <div className="bg-black p-5 flex justify-between items-center text-white">
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="font-display font-medium tracking-wide text-sm">Inquiry Assistant</span>
+            <span className={`${displayFont} tracking-wide text-sm`}>
+                {language === 'ar' ? 'مساعد الاستفسارات' : 'Inquiry Assistant'}
+            </span>
           </div>
           <div className="flex gap-4">
              <button onClick={() => {
-                 setMessages([{ role: 'model', text: 'Welcome to S3Ts Tech. I am your Inquiry Assistant.' }]);
+                 setMessages([{ role: 'model', text: initialMsg }]);
                  setChatSession(createChatSession());
              }} className="hover:opacity-70 transition-opacity"><RefreshCw size={16} strokeWidth={1.5} /></button>
              <button onClick={() => setIsOpen(false)} className="hover:opacity-70 transition-opacity"><Minus size={16} strokeWidth={1.5} /></button>
@@ -101,7 +121,7 @@ const ChatSupport: React.FC = () => {
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex mb-6 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div 
-                className={`max-w-[85%] py-3 px-4 text-xs leading-relaxed tracking-wide ${
+                className={`max-w-[85%] py-3 px-4 text-xs leading-relaxed tracking-wide ${fontClass} ${
                   msg.role === 'user' 
                     ? 'bg-black text-white' 
                     : 'bg-gray-50 text-gray-600 border border-gray-100'
@@ -128,8 +148,8 @@ const ChatSupport: React.FC = () => {
           <div className="flex items-center gap-2 border-b border-gray-200 py-2">
             <input
               type="text"
-              className="flex-1 bg-transparent border-none outline-none text-xs text-gray-800 placeholder-gray-400 font-light tracking-wide"
-              placeholder="Type your inquiry..."
+              className={`flex-1 bg-transparent border-none outline-none text-xs text-gray-800 placeholder-gray-400 font-light tracking-wide ${fontClass}`}
+              placeholder={language === 'ar' ? "اكتب استفسارك..." : "Type your inquiry..."}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
@@ -139,7 +159,7 @@ const ChatSupport: React.FC = () => {
                 disabled={!inputValue.trim() || loadingState === LoadingState.LOADING}
                 className="text-black hover:opacity-60 disabled:opacity-30 transition-opacity"
             >
-              <Send size={16} strokeWidth={1.5} />
+              <Send size={16} strokeWidth={1.5} className={language === 'ar' ? 'rotate-180' : ''} />
             </button>
           </div>
         </div>
