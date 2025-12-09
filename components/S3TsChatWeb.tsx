@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Send, Mic, Video, Phone, MoreVertical, Search, Paperclip, Globe, ShieldCheck, Zap, User, Settings, LogOut, X, PhoneIncoming, Trash2, Ban, Volume2, Lock, Bell, HardDrive, Moon, HelpCircle, Users, RefreshCcw, Camera, ChevronRight, Instagram, Facebook, Share2, Link, CheckCircle2, Briefcase, Store, BarChart3, ShoppingBag, Plus, PhoneOutgoing, PhoneMissed, Image as ImageIcon, CircleDashed, Clock, LayoutGrid, Megaphone } from 'lucide-react';
-import { MessageSquare as MessageIcon } from 'lucide-react';
+import { ArrowLeft, Send, Mic, Video, Phone, MoreVertical, Search, Paperclip, Globe, ShieldCheck, Zap, User, Settings, LogOut, X, PhoneIncoming, Trash2, Ban, Volume2, Lock, Bell, HardDrive, Moon, HelpCircle, Users, RefreshCcw, Camera, ChevronRight, Instagram, Facebook, Share2, Link, CheckCircle2, Briefcase, Store, BarChart3, ShoppingBag, Plus, PhoneOutgoing, PhoneMissed, Image as ImageIcon, CircleDashed, Clock, LayoutGrid, Megaphone, MessageSquare as MessageIcon } from 'lucide-react';
 
 interface S3TsChatWebProps {
   onNavigate: (view: 'home') => void;
@@ -313,7 +312,7 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
                                 </div>
                                 <div>
                                     <h4 className="text-sm font-medium text-gray-200">{call.name}</h4>
-                                    <p className="text-[10px] text-gray-500 flex items-center gap-2">
+                                    <p className="text-xs text-gray-500 flex items-center gap-2">
                                         {call.time} {call.duration && <span>• {call.duration}</span>}
                                     </p>
                                 </div>

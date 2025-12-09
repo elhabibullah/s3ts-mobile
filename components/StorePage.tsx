@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { Check, Star, Shield, Zap, X, ChevronRight } from 'lucide-react';
+import { Check, Star, Shield, Zap, X, ChevronRight, Plus } from 'lucide-react';
 import { Language } from '../types';
 
 interface StorePageProps {
@@ -8,8 +9,17 @@ interface StorePageProps {
   translations?: any;
 }
 
+const VARIANTS = [
+    { id: 'grey', name: 'Titanium Grey', color: 'bg-gray-300', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_grey_rectoverso-transparent.png' },
+    { id: 'black', name: 'Midnight Black', color: 'bg-zinc-900', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_black_rectoverso-transparent.png' },
+    { id: 'blue', name: 'Sapphire Blue', color: 'bg-blue-900', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_blue_rectoverso-transparent.png' },
+    { id: 'rose', name: 'Rose Gold', color: 'bg-rose-300', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_gd-rose_rectoverso-transparent.png' },
+];
+
 const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', translations }) => {
   const [showSpecs, setShowSpecs] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState(VARIANTS[0]);
+  const [activeVariantModal, setActiveVariantModal] = useState<typeof VARIANTS[0] | null>(null);
   
   // Fallback to avoid crash if translations undefined
   const t = translations || {};
@@ -19,32 +29,47 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
 
   return (
     <div className={`pb-20 bg-white min-h-screen animate-fade-in relative ${language === 'ar' ? 'font-tajawal' : 'font-sans'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 reveal active pt-8">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 reveal active pt-4 md:pt-8">
         
         {/* Header - Simple Breadcrumbs */}
-        <div className="flex flex-col items-center mb-16">
+        <div className="flex flex-col items-center mb-4 md:mb-16">
             <div className={`text-[10px] uppercase tracking-widest text-gray-400 ${textFont}`}>
                 {t.store_crumb || 'Store / Smartphones / S3Ts Pro 3.0'}
             </div>
-             {/* Branding Logo */}
-             {/* Logo removed as requested in previous steps for Store Page */}
         </div>
 
-        <div className="flex flex-col md:flex-row gap-16">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16">
             
-            {/* Left: Main Image Only (Gallery Removed) */}
+            {/* Left: Main Image & Gallery */}
             <div className="flex-1">
-                <div className="bg-gray-50 aspect-[4/5] w-full mb-4 relative overflow-hidden flex items-center justify-center">
+                {/* Main Display - Frame Removed on Mobile */}
+                <div className="w-full h-auto relative flex items-center justify-center mb-4 md:mb-8 md:bg-white md:border md:border-gray-100 md:rounded-xl md:aspect-[4/5] md:overflow-hidden">
                     <img 
-                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-transparent-grey.png" 
-                        alt="S3Ts Pro 3.0 Titanium" 
-                        className="w-[85%] h-auto object-contain hover:scale-105 transition-transform duration-700 drop-shadow-2xl"
+                        src={selectedVariant.image} 
+                        alt={`S3Ts Pro 3.0 ${selectedVariant.name}`} 
+                        className="w-full md:w-[85%] h-auto object-contain hover:scale-105 transition-transform duration-700 drop-shadow-2xl"
                     />
+                </div>
+                
+                {/* Horizontal Scroll Gallery */}
+                <div>
+                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 text-gray-400 ${textFont}`}>Explore Colors</h3>
+                    <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                        {VARIANTS.map((variant) => (
+                            <div 
+                                key={variant.id}
+                                onClick={() => setActiveVariantModal(variant)}
+                                className="flex-shrink-0 w-24 h-24 bg-white border border-gray-200 rounded-xl flex items-center justify-center cursor-pointer hover:border-black transition-colors p-2"
+                            >
+                                <img src={variant.image} alt={variant.name} className="w-full h-full object-contain" />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
             {/* Right: Details */}
-            <div className="flex-1 pt-4">
+            <div className="flex-1 pt-0 md:pt-4">
                 <div className="border-b border-gray-100 pb-8 mb-8">
                     <h1 className={`text-3xl md:text-5xl text-gray-900 mb-2 ${displayFont}`}>S3Ts Pro 3.0</h1>
                     <p className={`text-sm text-gray-500 font-light tracking-wide mb-6 ${textFont}`}>{t.store_tagline}</p>
@@ -54,12 +79,20 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
                     </p>
                 </div>
 
-                {/* Configuration */}
+                {/* Configuration (Color Pads) */}
                 <div className="mb-10">
-                    <label className={`block text-[10px] font-bold uppercase tracking-widest mb-4 ${textFont}`}>{t.store_finish}</label>
+                    <label className={`block text-[10px] font-bold uppercase tracking-widest mb-4 ${textFont}`}>
+                        {t.store_finish}: <span className="text-gray-900">{selectedVariant.name}</span>
+                    </label>
                     <div className="flex gap-4">
-                        <button className="w-12 h-12 rounded-full bg-zinc-800 border-2 border-zinc-800 ring-2 ring-offset-2 ring-black"></button>
-                        <button className="w-12 h-12 rounded-full bg-gray-300 border-2 border-transparent hover:border-gray-400"></button>
+                        {VARIANTS.map((variant) => (
+                            <button 
+                                key={variant.id}
+                                onClick={() => setSelectedVariant(variant)}
+                                className={`w-12 h-12 rounded-full border-2 ${variant.color} ${selectedVariant.id === variant.id ? 'ring-2 ring-offset-2 ring-black border-transparent' : 'border-transparent hover:scale-110'} transition-all`}
+                                title={variant.name}
+                            />
+                        ))}
                     </div>
                 </div>
 
@@ -192,6 +225,49 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
               </div>
           </div>
       )}
+
+      {/* Variant Popup Modal */}
+      {activeVariantModal && (
+          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setActiveVariantModal(null)}></div>
+              <div className="bg-white w-full max-w-lg overflow-hidden relative shadow-2xl animate-scale-up" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                   <button 
+                        onClick={() => setActiveVariantModal(null)}
+                        className="absolute top-4 right-4 z-10 p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                   >
+                       <X size={20} className="text-black" />
+                   </button>
+
+                   <div className="p-8 flex flex-col items-center">
+                        <h3 className={`text-2xl mb-2 ${displayFont} text-center`}>{activeVariantModal.name}</h3>
+                        <p className={`text-xs text-gray-500 uppercase tracking-widest mb-8 ${textFont}`}>Limited Edition Color</p>
+
+                        <div className="w-64 h-64 mb-8 flex items-center justify-center">
+                            <img src={activeVariantModal.image} alt={activeVariantModal.name} className="w-full h-full object-contain drop-shadow-xl" />
+                        </div>
+
+                        <div className="w-full bg-gray-50 p-6 rounded-xl mb-6">
+                             <div className="flex justify-between items-center mb-2">
+                                 <span className={`text-sm font-bold text-gray-900 ${textFont}`}>S3Ts Pro 3.0</span>
+                                 <span className={`text-sm font-bold text-gray-900 ${textFont}`}>{t.store_price}</span>
+                             </div>
+                             <p className={`text-xs text-gray-500 ${textFont}`}>1TB Quantum Storage • {activeVariantModal.name} Finish</p>
+                        </div>
+
+                        <button 
+                            onClick={() => {
+                                onAddToCart();
+                                setActiveVariantModal(null);
+                            }}
+                            className={`w-full bg-black text-white py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-zinc-800 transition-colors ${textFont}`}
+                        >
+                            {t.store_add}
+                        </button>
+                   </div>
+              </div>
+          </div>
+      )}
+
     </div>
   );
 };

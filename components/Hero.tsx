@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
           {/* 1. Phone Image - Centered and Dominant */}
           <div className="relative z-20 w-[90%] max-w-[500px] md:w-[750px] flex-shrink-0 mb-0 -mb-16 md:-mb-32">
              <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-transparent-grey.png" 
+                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_grey_rectoverso-transparent.png" 
                 alt="S3Ts Pro 3.0"
                 className="w-full h-full object-contain drop-shadow-2xl"
               />
