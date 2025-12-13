@@ -9,12 +9,13 @@ import StorePage from './components/StorePage';
 import InvestorsPage from './components/InvestorsPage';
 import AboutPage from './components/AboutPage';
 import S3TsChatWeb from './components/S3TsChatWeb';
+import TelecomPage from './components/TelecomPage';
 import { PRODUCTS, TRANSLATIONS } from './constants';
 import { Language } from './types';
 import { Check, Box, Mic, Globe, ShieldCheck, X, ExternalLink } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'store' | 'investors' | 'about' | 'chat-web'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'store' | 'investors' | 'about' | 'chat-web' | 'telecom'>('home');
   const [cartCount, setCartCount] = useState(0);
   const [activeInfoModal, setActiveInfoModal] = useState<'chat' | 'quantum' | null>(null);
   
@@ -22,9 +23,9 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState<Language>('en');
   const t = TRANSLATIONS[language]; // Current translation object
 
-  const handleNavigate = (view: 'home' | 'store' | 'investors' | 'about' | 'chat-web') => {
+  const handleNavigate = (view: 'home' | 'store' | 'investors' | 'about' | 'chat-web' | 'telecom') => {
     setCurrentView(view);
-    if (view !== 'chat-web') {
+    if (view !== 'chat-web' && view !== 'telecom') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -63,9 +64,13 @@ const App: React.FC = () => {
   const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
   const textFont = language === 'ar' ? 'font-tajawal' : 'font-sans font-light';
 
-  // If we are in the Chat Web Interface, render full screen without standard layout
+  // Standalone Views (No Global Navbar/Footer)
   if (currentView === 'chat-web') {
       return <S3TsChatWeb onNavigate={() => setCurrentView('home')} />;
+  }
+
+  if (currentView === 'telecom') {
+      return <TelecomPage onNavigate={handleNavigate} language={language} />;
   }
 
   return (
@@ -280,7 +285,7 @@ const App: React.FC = () => {
 
                         <div className={`space-y-8 text-sm font-light text-gray-300 leading-relaxed ${textFont}`}>
                             <p className="italic text-center text-gray-400 border-b border-white/10 pb-6">
-                                {language === 'ar' ? '"أسرع من iMessage. أكثر حرية من WhatsApp. أكثر أماناً من Signal."' : '"Faster than iMessage. Freer than WhatsApp. More secure than Signal."'}
+                                {language === 'ar' ? 'أسرع من iMessage. أكثر حرية من WhatsApp. أكثر أماناً من Signal.' : 'Faster than iMessage. Freer than WhatsApp. More secure than Signal.'}
                             </p>
                             
                             <div className="space-y-6">

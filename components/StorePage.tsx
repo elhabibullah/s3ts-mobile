@@ -29,11 +29,11 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
 
   return (
     <div className={`pb-20 bg-white min-h-screen animate-fade-in relative ${language === 'ar' ? 'font-tajawal' : 'font-sans'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 reveal active pt-4 md:pt-8">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 reveal active pt-0 md:pt-8">
         
         {/* Header - Simple Breadcrumbs */}
-        <div className="flex flex-col items-center mb-4 md:mb-16">
-            <div className={`text-[10px] uppercase tracking-widest text-gray-400 ${textFont}`}>
+        <div className="flex flex-col items-center mb-0 md:mb-16">
+            <div className={`hidden md:block text-[10px] uppercase tracking-widest text-gray-400 ${textFont}`}>
                 {t.store_crumb || 'Store / Smartphones / S3Ts Pro 3.0'}
             </div>
         </div>
@@ -43,7 +43,7 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
             {/* Left: Main Image & Gallery */}
             <div className="flex-1">
                 {/* Main Display - Frame Removed on Mobile */}
-                <div className="w-full h-auto relative flex items-center justify-center mb-4 md:mb-8 md:bg-white md:border md:border-gray-100 md:rounded-xl md:aspect-[4/5] md:overflow-hidden">
+                <div className="w-full h-auto relative flex items-center justify-center mb-0 md:mb-8 md:bg-white md:border md:border-gray-100 md:rounded-xl md:aspect-[4/5] md:overflow-hidden">
                     <img 
                         src={selectedVariant.image} 
                         alt={`S3Ts Pro 3.0 ${selectedVariant.name}`} 
@@ -53,7 +53,7 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
                 
                 {/* Horizontal Scroll Gallery */}
                 <div>
-                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 text-gray-400 ${textFont}`}>Explore Colors</h3>
+                    <h3 className={`text-xs font-bold uppercase tracking-widest mb-4 text-gray-400 mt-4 md:mt-0 ${textFont}`}>Explore Colors</h3>
                     <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
                         {VARIANTS.map((variant) => (
                             <div 

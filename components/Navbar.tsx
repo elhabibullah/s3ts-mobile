@@ -4,9 +4,9 @@ import { NAV_ITEMS } from '../constants';
 import { Language } from '../types';
 
 interface NavbarProps {
-  onNavigate: (view: 'home' | 'store' | 'investors' | 'about') => void;
+  onNavigate: (view: 'home' | 'store' | 'investors' | 'about' | 'telecom') => void;
   cartCount?: number;
-  currentView: 'home' | 'store' | 'investors' | 'about';
+  currentView: 'home' | 'store' | 'investors' | 'about' | 'telecom';
   language: Language;
   translations: any;
 }
@@ -17,10 +17,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView,
   const handleNavClick = (href: string) => {
     if (href === '#store') {
         onNavigate('store');
+    } else if (href === '#telecom') {
+        onNavigate('telecom');
     } else {
         onNavigate('home');
         // If it's a hash link, scroll to it after rendering home
-        if (href.startsWith('#')) {
+        if (href.startsWith('#') && href !== '#telecom') {
              setTimeout(() => {
                 const element = document.querySelector(href);
                 element?.scrollIntoView({ behavior: 'smooth' });
@@ -67,8 +69,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView,
           <div className="flex-0 flex justify-center absolute left-1/2 transform -translate-x-1/2 z-50">
             <button onClick={() => onNavigate('home')} className="flex flex-col items-center group">
                <img 
-                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
-                  alt="S3Ts Logo" 
+                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/SUM%C4%80MAH_whitelogo_white_bg.jpg" 
+                  alt="Sumāmah Logo" 
                   className="h-14 md:h-20 w-auto transition-transform duration-300 group-hover:scale-105"
                />
             </button>

@@ -3,6 +3,7 @@ import { NavItem, Product } from './types';
 export const TRANSLATIONS = {
   en: {
     nav_pro3: 'S3Ts Pro 3.0',
+    nav_telecom: 'Telecom',
     nav_holo: 'HOLO-Beam',
     nav_neural: 'Neural OS',
     nav_solar: 'Solar Tech',
@@ -86,8 +87,8 @@ export const TRANSLATIONS = {
     spec_bright: 'Brightness', spec_bright_val: 'Auto-boost (Direct Sunlight Readable)',
     
     spec_cat_conn: 'Connectivity & Network',
-    spec_sat: 'Satellite Internet', spec_sat_val: 'S3Ts Quantum-Link™ (Built-in)',
-    spec_cov: 'Coverage', spec_cov_val: 'Global (100% Earth Surface)',
+    spec_sat: 'SIM Config', spec_sat_val: 'Dual Active eSIM (S3Ts Mobile™ + eSIM+)',
+    spec_cov: 'Satellite', spec_cov_val: 'Quantum-Link™ (Global Coverage)',
     spec_cost: 'Cost', spec_cost_val: 'Free Unlimited Lifetime Data',
     spec_speed: 'Speed', spec_speed_val: '6G Quantum Standard',
     spec_type: 'Type', spec_type_val: 'Hybrid Mobile-Satellite',
@@ -106,7 +107,7 @@ export const TRANSLATIONS = {
     about_back: 'Back to Home',
     about_title: 'About S3Ts Tech',
     about_subtitle: 'The Future of Ethical Innovation',
-    about_p1: 'The S3Ts Pro 3.0 is a product of the collective brilliance and dedication of our world-class engineers, scientists, and designers at S3Ts Tech. As a premium technology corporation rooted in Saudi Arabia, we pride ourselves on pushing the boundaries of what was previously thought impossible.',
+    about_p1: 'The S3Ts Pro 3.0 is a product of the collective brilliance and dedication of our world-class engineers, scientists, and designers at S3Ts Tech. Our name, derived from "Sumāmah" (Loftiness), embodies our pursuit of the highest peaks of innovation. As a premium technology corporation rooted in Saudi Arabia, we pride ourselves on pushing the boundaries of what was previously thought impossible.',
     about_founder_role: 'Founder & Inventor',
     about_founder_name: 'Abdelwahid Habibullah Adam Banu Hashim',
     about_founder_title: 'Belgian Inventor, Entrepreneur, and Founder',
@@ -118,6 +119,7 @@ export const TRANSLATIONS = {
   },
   ar: {
     nav_pro3: 'S3Ts Pro 3.0',
+    nav_telecom: 'تيليكوم',
     nav_holo: 'شعاع هولو',
     nav_neural: 'نظام عصبي',
     nav_solar: 'تقنية شمسية',
@@ -201,8 +203,8 @@ export const TRANSLATIONS = {
     spec_bright: 'السطوع', spec_bright_val: 'تعزيز تلقائي (قابل للقراءة تحت ضوء الشمس المباشر)',
     
     spec_cat_conn: 'الاتصال والشبكة',
-    spec_sat: 'الإنترنت الفضائي', spec_sat_val: 'S3Ts Quantum-Link™ (مدمج)',
-    spec_cov: 'التغطية', spec_cov_val: 'عالمية (100% من سطح الأرض)',
+    spec_sat: 'تكوين الشريحة', spec_sat_val: 'شريحة إلكترونية مزدوجة (S3Ts Mobile™ + eSIM+)',
+    spec_cov: 'الأقمار الصناعية', spec_cov_val: 'S3Ts Quantum-Link™ (تغطية عالمية)',
     spec_cost: 'التكلفة', spec_cost_val: 'بيانات مجانية غير محدودة مدى الحياة',
     spec_speed: 'السرعة', spec_speed_val: 'معيار الكم 6G',
     spec_type: 'النوع', spec_type_val: 'هجين جوال-أقمار صناعية',
@@ -221,7 +223,7 @@ export const TRANSLATIONS = {
     about_back: 'العودة للرئيسية',
     about_title: 'عن S3Ts Tech',
     about_subtitle: 'مستقبل الابتكار الأخلاقي',
-    about_p1: 'إن S3Ts Pro 3.0 هو نتاج التألق الجماعي وتفاني مهندسينا وعلمائنا ومصممينا العالميين في S3Ts Tech. بصفتنا شركة تقنية متميزة متجذرة في المملكة العربية السعودية، فإننا نفخر بدفع حدود ما كان يعتقد سابقاً أنه مستحيل.',
+    about_p1: 'إن S3Ts Pro 3.0 هو نتاج التألق الجماعي وتفاني مهندسينا وعلمائنا ومصممينا العالميين في S3Ts Tech. مشتق من "السمامة" (الرفعة)، يجسد اسمنا سعينا الدؤوب نحو أعلى قمم الابتكار. بصفتنا شركة تقنية متميزة متجذرة في المملكة العربية السعودية، فإننا نفخر بدفع حدود ما كان يعتقد سابقاً أنه مستحيل.',
     about_founder_role: 'المؤسس والمخترع',
     about_founder_name: 'عبد الواحد حبيب الله آدم بنو هاشم',
     about_founder_title: 'مخترع ورائد أعمال ومؤسس بلجيكي',
@@ -235,6 +237,7 @@ export const TRANSLATIONS = {
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'nav_pro3', href: '#pro3', hasDropdown: true },
+  { label: 'nav_telecom', href: '#telecom' },
   { label: 'nav_holo', href: '#holographic' },
   { label: 'nav_neural', href: '#ai' },
   { label: 'nav_solar', href: '#energy' },

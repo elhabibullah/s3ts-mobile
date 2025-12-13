@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Send, Mic, Video, Phone, MoreVertical, Search, Paperclip, Globe, ShieldCheck, Zap, User, Settings, LogOut, X, PhoneIncoming, Trash2, Ban, Volume2, Lock, Bell, HardDrive, Moon, HelpCircle, Users, RefreshCcw, Camera, ChevronRight, Instagram, Facebook, Share2, Link, CheckCircle2, Briefcase, Store, BarChart3, ShoppingBag, Plus, PhoneOutgoing, PhoneMissed, Image as ImageIcon, CircleDashed, Clock, LayoutGrid, Megaphone, MessageSquare as MessageIcon } from 'lucide-react';
 
@@ -110,6 +109,88 @@ const INITIAL_UPDATES: StatusUpdate[] = [
     { id: 2, author: 'Dr. Youssef Clinic', text: 'We are closed for maintenance today.', time: '1 hour ago', isMe: false },
 ];
 
+// --- NEURAL RAIN BACKGROUND COMPONENT ---
+const NeuralRain = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Characters to rain (S3Ts + Binary + Hex)
+        const chars = 'S3Ts 0 1 0 1 0 1 0 1 0 1 QUANTUM HOLO NEURAL'.split('');
+        
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        // Array of drops - one per column
+        const drops: number[] = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        const draw = () => {
+            // Black BG for the canvas
+            // Translucent black to create trail effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                
+                // Randomly choose colors: Mostly Teal, sometimes White
+                const isWhite = Math.random() > 0.98;
+                
+                if (isWhite) {
+                    ctx.fillStyle = '#ffffff'; // White Spark
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#ffffff';
+                } else {
+                    ctx.fillStyle = '#0d9488'; // Teal-600
+                    ctx.shadowBlur = 0;
+                }
+
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Sending the drop back to the top randomly after it has crossed the screen
+                // Adding a randomness to the reset to make the drops scattered on the Y axis
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                // Incrementing Y coordinate
+                drops[i]++;
+            }
+        };
+
+        const interval = setInterval(draw, 33);
+        
+        // Handle Resize
+        const handleResize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    return <canvas ref={canvasRef} className="absolute inset-0 z-0 bg-black" />;
+};
+
+
 const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
   const [loginStep, setLoginStep] = useState<'scan' | 'verifying' | 'success' | 'chat'>('scan');
   const [activeChatId, setActiveChatId] = useState(0);
@@ -161,7 +242,7 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
   // Auto-login simulation
   useEffect(() => {
     if (loginStep === 'scan') {
-      const timer = setTimeout(() => setLoginStep('verifying'), 2000);
+      const timer = setTimeout(() => setLoginStep('verifying'), 2500); // Slightly longer to enjoy animation
       return () => clearTimeout(timer);
     }
     if (loginStep === 'verifying') {
@@ -508,20 +589,20 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
   if (loginStep !== 'chat') {
     return (
         <div className="min-h-screen bg-black text-teal-400 font-display flex flex-col items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10" 
-                 style={{backgroundImage: 'linear-gradient(#0d9488 1px, transparent 1px), linear-gradient(90deg, #0d9488 1px, transparent 1px)', backgroundSize: '40px 40px'}}>
-            </div>
+            
+            {/* Custom Neural Rain Canvas */}
+            <NeuralRain />
 
-            <div className="z-10 text-center space-y-8 animate-fade-in">
+            <div className="z-10 text-center space-y-8 animate-fade-in relative">
                 <div className="w-32 h-32 mx-auto relative flex items-center justify-center">
                      <div className={`absolute inset-0 border-2 border-teal-500/30 rounded-full ${loginStep === 'verifying' ? 'animate-ping' : ''}`}></div>
                      <div className="absolute inset-0 border-2 border-t-teal-400 border-r-transparent border-b-teal-400 border-l-transparent rounded-full animate-spin"></div>
                      <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" className="w-24 h-24 rounded-full opacity-80" alt="Logo" />
                 </div>
 
-                <div>
-                    <h1 className="text-3xl tracking-widest uppercase mb-2">S3TsChat loading data</h1>
-                    <p className="text-xs tracking-[0.3em] text-teal-600 uppercase">
+                <div className="bg-black/40 backdrop-blur-sm p-4 rounded-xl border border-teal-900/30">
+                    <h1 className="text-3xl tracking-widest uppercase mb-2 text-white drop-shadow-[0_0_10px_rgba(13,148,136,0.5)]">S3Ts Neural</h1>
+                    <p className="text-xs tracking-[0.3em] text-teal-400 uppercase animate-pulse">
                         {loginStep === 'scan' && 'Connecting to Neural Core...'}
                         {loginStep === 'verifying' && 'Syncing Holographic Node...'}
                         {loginStep === 'success' && 'Identity Confirmed'}
