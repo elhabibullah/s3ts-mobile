@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { ArrowLeft, HeartHandshake } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Zap, Globe, Heart } from 'lucide-react';
 import { Language } from '../types';
 
 interface AboutPageProps {
@@ -9,7 +10,6 @@ interface AboutPageProps {
 }
 
 const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, language = 'en', translations }) => {
-  // Fallback
   const t = translations || {};
   
   const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
@@ -17,7 +17,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, language = 'en', tran
 
   return (
     <div className={`pt-4 pb-24 bg-white min-h-screen animate-fade-in px-6 ${language === 'ar' ? 'text-right' : 'text-center'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         
         {/* Back Button */}
         <div className={`flex ${language === 'ar' ? 'justify-end' : 'justify-start'} mb-8 md:mb-12`}>
@@ -29,61 +29,57 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, language = 'en', tran
             </button>
         </div>
 
-        {/* Custom Gold/Blue Medal Icon */}
+        {/* Brand Icon */}
         <div className="mx-auto mb-8 flex justify-center">
-            <svg 
-                width="48" 
-                height="48" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                {/* Ribbon (Under) - Blue */}
-                <path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88" className="fill-blue-600 stroke-blue-600" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-                {/* Main Circle - Black Outline, White Fill */}
-                <circle cx="12" cy="8" r="7" className="stroke-black fill-white" strokeWidth="1" />
-                {/* Middle Circle - Gold */}
-                <circle cx="12" cy="8" r="3.5" className="fill-yellow-500 stroke-none" />
-            </svg>
+            <div className="w-16 h-16 rounded-3xl bg-black flex items-center justify-center shadow-xl">
+                <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" alt="S3Ts Logo" className="w-10 h-auto brightness-200" />
+            </div>
         </div>
         
         <h1 className={`text-3xl md:text-5xl mb-6 text-gray-900 text-center ${displayFont}`}>{t.about_title}</h1>
         <p className={`text-gray-500 text-xs uppercase tracking-[0.2em] mb-12 text-center ${textFont}`}>{t.about_subtitle}</p>
 
-        <div className={`space-y-12 text-sm text-gray-600 leading-loose tracking-wide ${language === 'ar' ? 'text-justify' : 'text-justify md:text-center'} ${textFont}`}>
-            <p>
+        <div className={`space-y-16 text-sm text-gray-600 leading-loose tracking-wide ${textFont}`}>
+            <p className="text-lg md:text-xl text-gray-800 text-center max-w-2xl mx-auto font-light leading-relaxed">
                 {t.about_p1}
             </p>
             
-            <div className="border-t border-b border-gray-100 py-12 my-12 text-center">
+            {/* 3 Zeros Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12 border-y border-gray-100">
+                <div className="flex flex-col items-center text-center p-6">
+                    <Zap className="text-yellow-500 mb-4" size={32} />
+                    <h3 className={`text-xl mb-2 text-black ${displayFont}`}>{t.about_zero1}</h3>
+                    <p className="text-xs text-gray-500">{t.about_zero1_desc}</p>
+                </div>
+                <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-[40px]">
+                    <Heart className="text-red-500 mb-4" size={32} />
+                    <h3 className={`text-xl mb-2 text-black ${displayFont}`}>{t.about_zero2}</h3>
+                    <p className="text-xs text-gray-500">{t.about_zero2_desc}</p>
+                </div>
+                <div className="flex flex-col items-center text-center p-6">
+                    <Globe className="text-blue-500 mb-4" size={32} />
+                    <h3 className={`text-xl mb-2 text-black ${displayFont}`}>{t.about_zero3}</h3>
+                    <p className="text-xs text-gray-500">{t.about_zero3_desc}</p>
+                </div>
+            </div>
+
+            {/* Founder Section */}
+            <div className="py-12 text-center max-w-2xl mx-auto">
+                <ShieldCheck size={40} className="mx-auto mb-6 text-gray-300" strokeWidth={1} />
                 <h3 className={`text-xl mb-4 text-black ${displayFont}`}>{t.about_founder_role}</h3>
-                <p className="text-lg font-light text-gray-800">
+                <p className="text-2xl font-light text-gray-900 mb-2">
                     {t.about_founder_name}
                 </p>
-                <p className="text-xs text-gray-400 mt-2 uppercase tracking-widest">
+                <p className="text-[10px] text-gray-400 uppercase tracking-[0.3em]">
                     {t.about_founder_title}
                 </p>
+                <div className="mt-8 text-center text-gray-500">
+                    <p className="mb-6">{t.about_vision_p2}</p>
+                    <p className="font-medium text-gray-900 uppercase tracking-widest">{t.about_vision_strong}</p>
+                    <p className="mt-6">{t.about_vision_end}</p>
+                </div>
             </div>
-
-            <div className="bg-gray-50 p-8 md:p-12 border border-gray-100">
-                <div className="flex justify-center"><HeartHandshake size={40} className="mb-6 text-red-500" strokeWidth={1} /></div>
-                <h3 className={`text-lg mb-6 text-black text-center ${displayFont}`}>{t.about_vision_title}</h3>
-                <p className="mb-6">
-                    {t.about_vision_p1}
-                </p>
-                <p className="font-medium text-gray-900 text-center">
-                    {t.about_vision_strong}
-                </p>
-                <p className="mt-4">
-                    {t.about_vision_p2}
-                </p>
-            </div>
-
-            <p>
-                {t.about_vision_end}
-            </p>
         </div>
-
       </div>
     </div>
   );

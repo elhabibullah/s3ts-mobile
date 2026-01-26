@@ -121,10 +121,17 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
 
           <button 
             onClick={onToggleLanguage}
-            className="flex items-center gap-2 text-gray-500 hover:text-white cursor-pointer transition-colors"
+            className="flex items-center gap-3 text-gray-500 hover:text-white cursor-pointer transition-colors group"
           >
-              <span className={`text-xs tracking-wide ${fontClass}`}>{translations.footer_lang}</span>
-              <ChevronDown size={14} />
+              <div className="flex items-center gap-2">
+                {language === 'ar' ? (
+                   <span className="text-lg">🇸🇦</span>
+                ) : (
+                   <span className="text-lg">🇬🇧</span>
+                )}
+                <span className={`text-xs tracking-wide ${fontClass}`}>{translations.footer_lang}</span>
+              </div>
+              <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
           </button>
 
         </div>

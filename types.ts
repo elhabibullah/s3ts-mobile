@@ -1,3 +1,4 @@
+
 export interface Product {
   id: string;
   name: string;
@@ -7,6 +8,10 @@ export interface Product {
   price?: string;
   series: 'X' | 'V' | 'Y' | 'Accessory';
   specs?: string[];
+}
+
+export interface CartItem extends Product {
+  quantity: number;
 }
 
 export interface NavItem {
@@ -28,3 +33,5 @@ export enum LoadingState {
 }
 
 export type Language = 'en' | 'ar';
+
+export type AppView = 'home' | 'store' | 'investors' | 'about' | 'chat-web' | 'fitness' | 'fintech' | 'cv-maker' | 'nova-tax' | 'telecom' | 'foldable' | 'notebook' | 'cart';

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { HERO_SLIDES } from '../constants';
 import { Language } from '../types';
@@ -11,7 +12,6 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-advance slider (only if multiple slides, otherwise keep static)
   useEffect(() => {
     if (HERO_SLIDES.length > 1) {
         const timer = setInterval(() => {
@@ -23,67 +23,49 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
 
   const isVideo = (url: string) => url.endsWith('.mp4');
   
-  // Font classes
   const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
-  const textFont = language === 'ar' ? 'font-tajawal' : 'font-sans';
 
   return (
-    <div className="relative w-full overflow-hidden flex flex-col items-center pt-12 md:pt-16 pb-0 bg-white" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full bg-white flex flex-col items-center pt-8 md:pt-16 overflow-visible" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       {HERO_SLIDES.map((slide, index) => (
         <div
           key={slide.id}
-          className={`w-full flex flex-col items-center justify-start transition-opacity duration-1000 ease-in-out ${
+          className={`w-full flex flex-col items-center transition-opacity duration-1000 ${
             index === currentSlide ? 'opacity-100' : 'opacity-0 hidden'
           }`}
         >
-          
-          {/* 1. Phone Image - Centered and Dominant */}
-          <div className="relative z-20 w-[90%] max-w-[500px] md:w-[750px] flex-shrink-0 mb-0 -mb-16 md:-mb-32">
+          {/* Header Text */}
+          <div className="text-center px-6 mb-12 relative z-20">
+            <h2 className={`text-4xl md:text-7xl ${displayFont} tracking-tight mb-4 text-black`}>
+              {translations.hero_title}
+            </h2>
+          </div>
+
+          {/* Phone Render */}
+          <div className="w-[85%] max-w-[450px] md:max-w-[550px] relative z-20 animate-float">
              <img 
                 src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_grey_rectoverso-transparent.png" 
                 alt="S3Ts Pro 3.0"
-                className="w-full h-full object-contain drop-shadow-2xl"
+                className="w-full h-auto object-contain drop-shadow-2xl"
               />
           </div>
 
-          {/* 2. Bubble Container (Video Background + Text Foreground) */}
-          <div className="relative z-10 w-full flex flex-col items-center justify-center mt-1 md:mt-2 mb-[-50px] md:mb-[-200px]">
-              
-              {/* The Bubble (Video) */}
-              <div className="relative w-[250%] md:w-[2200px] flex items-center justify-center">
-                 {isVideo(slide.image) ? (
+          {/* Liquid Metaball */}
+          <div className="w-full max-w-[1400px] h-[300px] md:h-[500px] relative z-10 flex flex-col items-center px-4 overflow-visible">
+             {isVideo(slide.image) ? (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none">
                     <video 
                         autoPlay 
                         loop 
                         muted 
                         playsInline 
-                        className="w-full h-auto object-contain brightness-110 saturate-110"
+                        className="w-full h-auto object-contain opacity-100 brightness-110 saturate-105 scale-[1.8] md:scale-[3.2] transform translate-y-[20%] md:translate-y-[25%]"
                     >
                         <source src={slide.image} type="video/mp4" />
                     </video>
-                 ) : null}
-
-                 {/* Text - Centered inside bubble */}
-                 <div className="absolute inset-0 flex flex-col items-center justify-center pt-24 md:pt-48">
-                    <h2 className={`text-4xl md:text-8xl ${displayFont} tracking-wide mb-8 text-black drop-shadow-sm text-center`}>
-                      {translations.hero_title}
-                    </h2>
-                    <p className={`hidden md:block text-xl font-light tracking-wide text-gray-800 mb-10 max-w-2xl mx-auto text-center ${textFont}`}>
-                      {translations.hero_subtitle}
-                    </p>
-                    <div className="flex justify-center mt-4">
-                        <button 
-                            onClick={() => onNavigate('store')}
-                            className={`bg-black text-white px-10 py-4 md:px-14 md:py-6 text-xs md:text-sm font-bold tracking-[0.25em] uppercase hover:bg-zinc-800 transition-all duration-300 shadow-2xl relative z-30 ${textFont}`}
-                        >
-                            {translations.hero_cta}
-                        </button>
-                    </div>
-                 </div>
-              </div>
-
+                </div>
+             ) : null}
           </div>
-
         </div>
       ))}
     </div>
