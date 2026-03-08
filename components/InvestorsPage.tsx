@@ -17,7 +17,7 @@ const InvestorsPage: React.FC = () => {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-zinc-950 min-h-screen text-white animate-fade-in flex items-center justify-center">
+    <div className="pt-32 pb-24 bg-zinc-950 min-h-screen text-white animate-fade-in flex items-center justify-center overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full flex flex-col items-center">
         
         <div className="text-center mb-12">

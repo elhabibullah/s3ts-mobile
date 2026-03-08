@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShoppingBag, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingBag, User, Menu, X, Globe } from 'lucide-react';
 import { NAV_ITEMS } from '../constants';
 import { Language, AppView } from '../types';
 
@@ -9,9 +9,10 @@ interface NavbarProps {
   currentView: string;
   language: Language;
   translations: any;
+  onToggleLanguage: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView, language, translations }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView, language, translations, onToggleLanguage }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleNavClick = (href: string) => {
@@ -66,17 +67,26 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView,
             ))}
           </div>
 
-          <button 
-            className="lg:hidden text-black flex-1 flex justify-start z-50"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="lg:hidden flex-1 flex items-center justify-start gap-4 z-50">
+            <button 
+              className="text-black"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+            <button 
+              onClick={onToggleLanguage}
+              className="text-gray-900 hover:opacity-60 transition-opacity"
+              title={language === 'ar' ? 'English' : 'العربية'}
+            >
+              <Globe size={18} strokeWidth={1} />
+            </button>
+          </div>
 
           <div className="flex-0 flex justify-center absolute left-1/2 transform -translate-x-1/2 z-50">
             <button onClick={() => onNavigate('home')} className="flex flex-col items-center group">
                <img 
-                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/SUM%C4%80MAH_whitelogo_white_bg.jpg" 
+                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Logo-sumamah-S-TRANSPARENT-bg.png" 
                   alt="Sumāmah Logo" 
                   className="h-14 md:h-20 w-auto transition-transform duration-500 group-hover:scale-105"
                />
@@ -97,6 +107,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView,
             <div className={`flex items-center gap-6 ${language === 'ar' ? 'border-r pr-6' : 'border-l pl-6'} border-gray-300/30`}>
                 <button className="hover:opacity-60 transition-opacity">
                   <Search size={18} strokeWidth={1} />
+                </button>
+                <button 
+                  onClick={onToggleLanguage}
+                  className="flex items-center gap-2 hover:opacity-60 transition-opacity text-gray-900 group"
+                  title={language === 'ar' ? 'English' : 'العربية'}
+                >
+                  <Globe size={18} strokeWidth={1} />
+                  <span className="text-[10px] font-bold tracking-widest uppercase hidden xl:block">
+                    {language === 'ar' ? 'EN' : 'AR'}
+                  </span>
                 </button>
                 <button onClick={() => onNavigate('cart')} className="hover:opacity-60 transition-opacity relative group">
                   <ShoppingBag size={18} strokeWidth={1} />

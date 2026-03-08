@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
   const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
 
   return (
-    <div className="relative w-full bg-white flex flex-col items-center pt-8 md:pt-16 overflow-visible" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="relative w-full bg-white flex flex-col items-center pt-8 md:pt-16 overflow-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       {HERO_SLIDES.map((slide, index) => (
         <div
           key={slide.id}
@@ -44,14 +44,14 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
           {/* Phone Render */}
           <div className="w-[85%] max-w-[450px] md:max-w-[550px] relative z-20 animate-float">
              <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_grey_rectoverso-transparent.png" 
+                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_on_transparent.png" 
                 alt="S3Ts Pro 3.0"
                 className="w-full h-auto object-contain drop-shadow-2xl"
               />
           </div>
 
           {/* Liquid Metaball */}
-          <div className="w-full max-w-[1400px] h-[300px] md:h-[500px] relative z-10 flex flex-col items-center px-4 overflow-visible">
+          <div className="w-full max-w-[1400px] h-[300px] md:h-[500px] relative z-10 flex flex-col items-center px-4 overflow-hidden">
              {isVideo(slide.image) ? (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none">
                     <video 

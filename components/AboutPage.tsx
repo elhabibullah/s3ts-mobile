@@ -16,7 +16,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, language = 'en', tran
   const textFont = language === 'ar' ? 'font-tajawal' : 'font-sans font-light';
 
   return (
-    <div className={`pt-4 pb-24 bg-white min-h-screen animate-fade-in px-6 ${language === 'ar' ? 'text-right' : 'text-center'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <div className={`pt-4 pb-24 bg-white min-h-screen animate-fade-in px-6 ${language === 'ar' ? 'text-right' : 'text-center'} overflow-x-hidden`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-4xl mx-auto">
         
         {/* Back Button */}

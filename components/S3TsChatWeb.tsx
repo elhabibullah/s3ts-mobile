@@ -616,7 +616,7 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
   const currentMessages = chats[activeChatId] || [];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans flex flex-col md:flex-row overflow-hidden relative">
+    <div className="min-h-screen bg-zinc-950 text-white font-sans flex flex-col md:flex-row overflow-x-hidden relative">
       
       {/* Call Overlay */}
       {callStatus !== 'idle' && (

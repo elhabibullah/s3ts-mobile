@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowLeft, User, CheckCircle2, Zap, Play } from 'lucide-react';
+import { ArrowLeft, User, CheckCircle2, Zap, Play, Globe } from 'lucide-react';
 import { Language, AppView } from '../types';
 
 interface FitnessPageProps {
   onNavigate: (view: AppView) => void;
   language?: Language;
+  onToggleLanguage: () => void;
 }
 
-const FitnessPage: React.FC<FitnessPageProps> = ({ onNavigate, language = 'en' }) => {
+const FitnessPage: React.FC<FitnessPageProps> = ({ onNavigate, language = 'en', onToggleLanguage }) => {
   const isAr = language === 'ar';
   const displayFont = isAr ? 'font-amiri' : 'font-display';
   const textFont = isAr ? 'font-tajawal' : 'font-sans';
@@ -74,7 +75,7 @@ const FitnessPage: React.FC<FitnessPageProps> = ({ onNavigate, language = 'en' }
   ];
 
   return (
-    <div ref={containerRef} className={`min-h-screen bg-white text-zinc-900 ${textFont} ${isAr ? 'text-right' : 'text-left'} selection:bg-purple-100 selection:text-purple-600`} dir={isAr ? 'rtl' : 'ltr'}>
+    <div ref={containerRef} className={`bg-white text-zinc-900 ${textFont} ${isAr ? 'text-right' : 'text-left'} selection:bg-purple-100 selection:text-purple-600 overflow-x-hidden`} dir={isAr ? 'rtl' : 'ltr'}>
       
       {/* NAVBAR */}
       <nav className="h-16 md:h-20 border-b border-gray-100 flex items-center px-6 md:px-12 bg-black sticky top-0 z-50">
@@ -84,8 +85,20 @@ const FitnessPage: React.FC<FitnessPageProps> = ({ onNavigate, language = 'en' }
         <div className="flex-1 flex justify-center">
           <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Fit-4rce-X_App_logo.jpg" alt="Logo" className="h-10 md:h-12 w-auto object-contain" />
         </div>
-        <div className="hidden md:block w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-          <User size={16} className="text-white/50" />
+        <div className="hidden md:flex items-center gap-6">
+          <button 
+            onClick={onToggleLanguage}
+            className="flex items-center gap-2 text-white/50 hover:text-white transition-all group"
+            title={isAr ? 'English' : 'العربية'}
+          >
+            <Globe size={18} strokeWidth={1.5} />
+            <span className="text-[10px] font-bold tracking-widest uppercase">
+              {isAr ? 'EN' : 'AR'}
+            </span>
+          </button>
+          <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+            <User size={16} className="text-white/50" />
+          </div>
         </div>
       </nav>
 
@@ -191,12 +204,6 @@ const FitnessPage: React.FC<FitnessPageProps> = ({ onNavigate, language = 'en' }
           <span className="text-xl font-bold tracking-tight uppercase">{isAr ? 'تحميل التطبيق' : 'Download App'}</span>
         </button>
       </section>
-
-      {/* FOOTER */}
-      <footer className="py-20 bg-black flex flex-col items-center border-t border-white/5">
-        <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Fit-4rce-X_App_logo.jpg" alt="Logo" className="h-20 md:h-32 w-auto mb-8 opacity-70 object-contain" />
-        <p className="text-[10px] text-zinc-500 uppercase tracking-[0.5em]">S3Ts Sports & Performance Vision™</p>
-      </footer>
     </div>
   );
 };

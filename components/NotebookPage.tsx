@@ -7,24 +7,34 @@ interface NotebookPageProps {
   onNavigate: (view: AppView) => void;
   language?: Language;
   translations: any;
+  onToggleLanguage: () => void;
 }
 
-const NotebookPage: React.FC<NotebookPageProps> = ({ onNavigate, language = 'en', translations: t }) => {
+const NotebookPage: React.FC<NotebookPageProps> = ({ onNavigate, language = 'en', translations: t, onToggleLanguage }) => {
   const isAr = language === 'ar';
   const displayFont = isAr ? 'font-amiri font-bold' : 'font-display font-medium';
   const textFont = isAr ? 'font-tajawal' : 'font-sans';
 
   return (
-    <div className={`min-h-screen bg-black text-white ${textFont} ${isAr ? 'text-right' : 'text-left'} selection:bg-blue-400 selection:text-black`} dir={isAr ? 'rtl' : 'ltr'}>
+    <div className={`bg-black text-white ${textFont} ${isAr ? 'text-right' : 'text-left'} selection:bg-blue-400 selection:text-black overflow-x-hidden`} dir={isAr ? 'rtl' : 'ltr'}>
       
-      {/* Back Button */}
-      <div className={`fixed top-6 ${isAr ? 'right-6' : 'left-6'} z-50`}>
+      {/* Back Button & Language Toggle */}
+      <div className={`fixed top-6 ${isAr ? 'right-6' : 'left-6'} z-50 flex items-center gap-4`}>
           <button 
             onClick={() => onNavigate('home')}
             className="flex items-center gap-2 px-5 py-2.5 bg-zinc-900/80 backdrop-blur-md border border-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-white shadow-xl hover:bg-zinc-800 transition-all active:scale-95 group"
           >
             <ArrowLeft size={14} className={`${isAr ? 'rotate-180' : ''} group-hover:-translate-x-1 transition-transform`} />
             {t.about_back}
+          </button>
+
+          <button 
+            onClick={onToggleLanguage}
+            className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900/80 backdrop-blur-md border border-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-white shadow-xl hover:bg-zinc-800 transition-all active:scale-95"
+            title={isAr ? 'English' : 'العربية'}
+          >
+            <Globe size={14} />
+            <span>{isAr ? 'EN' : 'AR'}</span>
           </button>
       </div>
 

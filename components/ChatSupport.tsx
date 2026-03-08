@@ -7,13 +7,14 @@ import { VIVO_BLUE } from '../constants';
 
 interface ChatSupportProps {
     language?: 'en' | 'ar';
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
 }
 
-const ChatSupport: React.FC<ChatSupportProps> = ({ language = 'en' }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ChatSupport: React.FC<ChatSupportProps> = ({ language = 'en', isOpen, setIsOpen }) => {
   const initialMsg = language === 'ar' 
-    ? 'مرحباً بكم في S3Ts Tech. أنا مساعد الاستفسارات الخاص بكم.'
-    : 'Welcome to S3Ts Tech. I am your Inquiry Assistant.';
+    ? 'مرحباً بكم في S3Ts Tech. أنا مساعدكم الافتراضي.'
+    : 'Welcome to S3Ts Tech. I am your Virtual Assistant.';
     
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'model', text: initialMsg }
@@ -29,7 +30,7 @@ const ChatSupport: React.FC<ChatSupportProps> = ({ language = 'en' }) => {
      if (messages.length === 1 && messages[0].role === 'model') {
          setMessages([{ role: 'model', text: initialMsg }]);
      }
-  }, [language]);
+  }, [language, initialMsg]);
 
   useEffect(() => {
     if (isOpen && !chatSession) {
@@ -40,7 +41,7 @@ const ChatSupport: React.FC<ChatSupportProps> = ({ language = 'en' }) => {
         console.error("Failed to init chat", e);
       }
     }
-  }, [isOpen]);
+  }, [isOpen, chatSession]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -104,7 +105,7 @@ const ChatSupport: React.FC<ChatSupportProps> = ({ language = 'en' }) => {
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
             <span className={`${displayFont} tracking-wide text-sm`}>
-                {language === 'ar' ? 'مساعد الاستفسارات' : 'Inquiry Assistant'}
+                {language === 'ar' ? 'مساعد افتراضي' : 'Virtual Assistant'}
             </span>
           </div>
           <div className="flex gap-4">

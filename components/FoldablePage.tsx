@@ -7,24 +7,34 @@ interface FoldablePageProps {
   onNavigate: (view: AppView) => void;
   language?: Language;
   translations: any;
+  onToggleLanguage: () => void;
 }
 
-const FoldablePage: React.FC<FoldablePageProps> = ({ onNavigate, language = 'en', translations: t }) => {
+const FoldablePage: React.FC<FoldablePageProps> = ({ onNavigate, language = 'en', translations: t, onToggleLanguage }) => {
   const isAr = language === 'ar';
   const displayFont = isAr ? 'font-amiri font-bold' : 'font-display font-medium';
   const textFont = isAr ? 'font-tajawal' : 'font-sans';
 
   return (
-    <div className={`min-h-screen bg-white text-black ${textFont} ${isAr ? 'text-right' : 'text-left'} selection:bg-teal-500 selection:text-white`} dir={isAr ? 'rtl' : 'ltr'}>
+    <div className={`bg-white text-black ${textFont} ${isAr ? 'text-right' : 'text-left'} selection:bg-teal-500 selection:text-white overflow-x-hidden`} dir={isAr ? 'rtl' : 'ltr'}>
       
-      {/* Back Button */}
-      <div className={`fixed top-6 ${isAr ? 'right-6' : 'left-6'} z-50`}>
+      {/* Back Button & Language Toggle */}
+      <div className={`fixed top-6 ${isAr ? 'right-6' : 'left-6'} z-50 flex items-center gap-4`}>
           <button 
             onClick={() => onNavigate('home')}
             className="flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md border border-gray-100 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-900 shadow-sm hover:shadow-md hover:bg-white transition-all active:scale-95 group"
           >
             <ArrowLeft size={14} className={`${isAr ? 'rotate-180' : ''} group-hover:-translate-x-1 transition-transform`} />
             {t.about_back}
+          </button>
+          
+          <button 
+            onClick={onToggleLanguage}
+            className="flex items-center gap-2 px-4 py-2.5 bg-white/80 backdrop-blur-md border border-gray-100 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-900 shadow-sm hover:shadow-md hover:bg-white transition-all active:scale-95"
+            title={isAr ? 'English' : 'العربية'}
+          >
+            <Globe size={14} />
+            <span>{isAr ? 'EN' : 'AR'}</span>
           </button>
       </div>
 

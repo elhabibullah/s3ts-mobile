@@ -13,9 +13,14 @@ interface StorePageProps {
 }
 
 const VARIANTS = [
-    { id: 'grey', name: 'Titanium Grey', color: 'bg-gray-300', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_grey_rectoverso-transparent.png' },
-    { id: 'black', name: 'Midnight Black', color: 'bg-zinc-900', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_black_rectoverso-transparent.png' },
-    { id: 'blue', name: 'Sapphire Blue', color: 'bg-blue-900', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_blue_rectoverso-transparent.png' },
+    { id: 'grey', name: 'Chrome Grey', color: 'bg-[#8E8E8E]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chrome-grey_transparent.png' },
+    { id: 'black', name: 'Black Onyx Mat', color: 'bg-[#1A1A1A]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_black-onyx-mat_transparent.png' },
+    { id: 'blue', name: 'Navy Blue', color: 'bg-[#000080]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_navy-blue_transparent.png' },
+    { id: 'green', name: 'Green Forest-Emerald', color: 'bg-[#00402E]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_green-forest-emerauld_transparent.png' },
+    { id: 'rose', name: 'Golden Rose', color: 'bg-[#E6BE8A]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_golden-rose_transparent.png' },
+    { id: 'white', name: 'White', color: 'bg-[#FFFFFF] border-gray-200', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_white_transparent.png' },
+    { id: 'bordeaux', name: 'Bordeaux', color: 'bg-[#800020]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_bordeaux_transparent.png' },
+    { id: 'mokka', name: 'Brown Mokka', color: 'bg-[#4B3621]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_brown-mokka_transparent.png' },
 ];
 
 const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', translations, selectedProductId, onProductSelect }) => {
@@ -75,14 +80,14 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
             className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black transition-colors"
         >
             <ArrowLeft size={16} className={language === 'ar' ? 'rotate-180' : ''} />
-            {language === 'ar' ? 'العودة للمتجر' : 'Back to Store'}
+            {t.store_back}
         </button>
       </div>
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-8">
         <div className="flex flex-col md:flex-row gap-16 md:gap-24">
             <div className="flex-1">
-                <div className="w-full relative flex items-center justify-center bg-gray-50 rounded-[40px] aspect-[4/5] overflow-hidden">
+                <div className="w-full relative flex items-center justify-center bg-white rounded-[40px] aspect-[4/5] overflow-hidden">
                     <img 
                         src={currentProduct.id === 'pro3' ? selectedVariant.image : currentProduct.image} 
                         alt={currentProduct.name} 
@@ -102,13 +107,16 @@ const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', tra
 
                 {currentProduct.id === 'pro3' && (
                   <div className="mb-12">
-                      <label className="block text-xs font-bold uppercase tracking-widest mb-4">Color: <span className="text-gray-900">{selectedVariant.name}</span></label>
-                      <div className="flex gap-4">
+                      <label className="block text-xs font-bold uppercase tracking-widest mb-4">
+                        {t.store_color_label}: <span className="text-gray-900">{t[`color_${selectedVariant.id}`] || selectedVariant.name}</span>
+                      </label>
+                      <div className="flex gap-4 flex-wrap">
                           {VARIANTS.map((v) => (
                               <button 
                                   key={v.id}
                                   onClick={() => setSelectedVariant(v)}
                                   className={`w-12 h-12 rounded-full border-2 ${v.color} ${selectedVariant.id === v.id ? 'ring-2 ring-offset-2 ring-black' : 'border-transparent'}`}
+                                  title={t[`color_${v.id}`] || v.name}
                               />
                           ))}
                       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Instagram, Youtube, ChevronDown } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Globe } from 'lucide-react';
 import { Language } from '../types';
 
 interface FooterProps {
@@ -7,9 +7,10 @@ interface FooterProps {
   language: Language;
   onToggleLanguage: () => void;
   translations: any;
+  onOpenChat?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage, translations }) => {
+const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage, translations, onOpenChat }) => {
   
   const handleLinkClick = (e: React.MouseEvent, linkName: string) => {
     e.preventDefault();
@@ -19,13 +20,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
       onNavigate('investors');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (linkName === 'Contact Us' || linkName === 'اتصل بنا') {
-      window.location.href = "mailto:elhabibullah@gmail.com?subject=Inquiry%20regarding%20S3Ts%20Pro%203.0";
+      window.location.href = "mailto:elhabibullah@gmail.com?subject=Inquiry%20regarding%20SUMĀMAH";
     } else if (linkName === 'Pro 3.0' || linkName === 'برو 3.0') {
       onNavigate('store');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (linkName === 'About Us' || linkName === 'عن الشركة') {
       onNavigate('about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (linkName === 'Virtual Assistant' || linkName === 'مساعد افتراضي') {
+      onOpenChat?.();
     }
   };
 
@@ -37,7 +40,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
         language === 'ar' ? 'حافظة شمسية' : 'Solar Case'
     ],
     [translations.footer_support]: [
-        language === 'ar' ? 'كونسيرج' : 'Concierge', 
+        language === 'ar' ? 'مساعد افتراضي' : 'Virtual Assistant', 
         language === 'ar' ? 'مراكز الخدمة' : 'Service Centers', 
         language === 'ar' ? 'اتصل بنا' : 'Contact Us', 
         language === 'ar' ? 'إعادة التدوير' : 'Recycling', 
@@ -62,19 +65,22 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
   const displayFont = language === 'ar' ? 'font-amiri font-bold' : 'font-display font-medium';
 
   return (
-    <footer className="bg-black text-white pt-24 pb-12" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <footer className="bg-black text-white pt-24 pb-12 relative z-10" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         
-        {/* Brand */}
-        <div className="mb-16 flex items-center gap-6">
+        {/* Brand and Logo Section */}
+        <div className="flex flex-col items-center mb-16">
             <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
-                alt="S3Ts Logo" 
-                className="h-24 w-auto"
+                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Logo-sumamah-S-TRANSPARENT-bg.png" 
+                alt="Sumāmah Logo" 
+                className="h-20 md:h-28 w-auto mb-6 transition-transform hover:scale-110 duration-500"
             />
-            <span className={`text-xl md:text-2xl ${displayFont} text-white tracking-wide`}>
-                S3Ts Pro 3.0
+            <span className="text-2xl md:text-4xl font-orbitron font-extralight text-white tracking-[0.5em] uppercase select-none drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+                SUMĀMAH
             </span>
+            <p className={`mt-4 text-[10px] tracking-[0.5em] uppercase text-gray-500 font-medium ${fontClass}`}>
+                {language === 'ar' ? 'مستقبل تكنولوجيا الهاتف المحمول' : 'The Future of Mobile Technology'}
+            </p>
         </div>
 
         {/* Links Grid */}
@@ -101,39 +107,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 border-t border-gray-900 pt-12">
-          
-          <div className="flex gap-6">
-              {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-                  <a key={i} href="#" onClick={(e) => e.preventDefault()} className="text-gray-500 hover:text-white transition-colors">
-                    <Icon size={18} strokeWidth={1.5} />
-                  </a>
-              ))}
+          <div className={`flex flex-col items-center md:items-start gap-2 text-[10px] text-gray-600 tracking-widest uppercase ${fontClass}`}>
+             <span>SUMĀMAH is a trademark ™ of the Banu Hashim Enterprise Company (copyright) 2026</span>
           </div>
-
-          <div className={`flex items-center gap-2 text-[10px] text-gray-600 tracking-widest uppercase ${fontClass}`}>
-             <span>© 2025 S3Ts</span>
-             <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_logo_transparent_bg.png" 
-                alt="Logo" 
-                className="h-5 w-auto"
-            />
-          </div>
-
-          <button 
-            onClick={onToggleLanguage}
-            className="flex items-center gap-3 text-gray-500 hover:text-white cursor-pointer transition-colors group"
-          >
-              <div className="flex items-center gap-2">
-                {language === 'ar' ? (
-                   <span className="text-lg">🇸🇦</span>
-                ) : (
-                   <span className="text-lg">🇬🇧</span>
-                )}
-                <span className={`text-xs tracking-wide ${fontClass}`}>{translations.footer_lang}</span>
-              </div>
-              <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
-          </button>
-
         </div>
       </div>
     </footer>

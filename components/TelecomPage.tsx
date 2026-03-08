@@ -5,9 +5,10 @@ import { Language, AppView } from '../types';
 interface TelecomPageProps {
   onNavigate: (view: 'home' | 'store') => void;
   language?: Language;
+  onToggleLanguage: () => void;
 }
 
-const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en' }) => {
+const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en', onToggleLanguage }) => {
   const isAr = language === 'ar';
   const fontSans = isAr ? 'font-tajawal' : 'font-sans';
   const displayFont = isAr ? 'font-amiri font-bold' : 'font-display font-medium';
@@ -16,7 +17,7 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en' }
   const LOGO_URL = "https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sum%C4%81mah-Telecom.jpg";
 
   return (
-    <div className={`min-h-screen bg-black text-white ${fontSans} ${isAr ? 'text-right' : 'text-left'} overflow-x-hidden selection:bg-[#00D4C6] selection:text-black`} dir={isAr ? 'rtl' : 'ltr'}>
+    <div className={`bg-black text-white ${fontSans} ${isAr ? 'text-right' : 'text-left'} overflow-x-hidden selection:bg-[#00D4C6] selection:text-black`} dir={isAr ? 'rtl' : 'ltr'}>
       
       {/* --- SVG FILTERS (THE "SMOKE" ENGINE) --- */}
       <svg className="absolute w-0 h-0 overflow-hidden" aria-hidden="true">
@@ -82,6 +83,14 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en' }
               </div>
 
               <div className="flex items-center gap-4 md:gap-6">
+                  <button 
+                    onClick={onToggleLanguage}
+                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors"
+                    title={isAr ? 'English' : 'العربية'}
+                  >
+                    <Globe size={16} />
+                    <span>{isAr ? 'EN' : 'AR'}</span>
+                  </button>
                   <button onClick={() => onNavigate('home')} className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors">
                       <ArrowLeft size={14} className={isAr ? 'rotate-180' : ''} />
                       {isAr ? 'العودة' : 'Back'}
@@ -219,18 +228,6 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en' }
               </div>
           </div>
       </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="py-12 bg-black border-t border-white/10">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
-              <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">S3Ts Telecom Vision™</span>
-              <div className="flex gap-8">
-                  <a href="#" className="text-xs text-gray-600 hover:text-white transition-colors">Privacy Policy</a>
-                  <a href="#" className="text-xs text-gray-600 hover:text-white transition-colors">Terms of Service</a>
-              </div>
-          </div>
-      </footer>
-
     </div>
   );
 };

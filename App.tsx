@@ -26,6 +26,7 @@ const App: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
   const [language, setLanguage] = useState<Language>('en');
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const t = TRANSLATIONS[language];
 
   const handleNavigate = (view: AppView, productId?: string) => {
@@ -120,19 +121,19 @@ const App: React.FC = () => {
       case 'cart':
         return <CartPage items={cartItems} onUpdateQuantity={handleUpdateQuantity} onRemove={handleRemoveFromCart} onContinueShopping={() => handleNavigate('store')} language={language} translations={t} />;
       case 'telecom':
-        return <TelecomPage onNavigate={handleNavigate} language={language} />;
+        return <TelecomPage onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} />;
       case 'fintech':
-        return <FintechPage onNavigate={handleNavigate} language={language} />;
+        return <FintechPage onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} />;
       case 'fitness':
-        return <FitnessPage onNavigate={handleNavigate} language={language} />;
+        return <FitnessPage onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} />;
       case 'cv-maker':
-        return <CVMakerPage onNavigate={handleNavigate} language={language} />;
+        return <CVMakerPage onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} />;
       case 'nova-tax':
-        return <NovaTaxPage onNavigate={handleNavigate} language={language} />;
+        return <NovaTaxPage onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} />;
       case 'foldable':
-        return <FoldablePage onNavigate={handleNavigate} language={language} translations={t} />;
+        return <FoldablePage onNavigate={handleNavigate} language={language} translations={t} onToggleLanguage={toggleLanguage} />;
       case 'notebook':
-        return <NotebookPage onNavigate={handleNavigate} language={language} translations={t} />;
+        return <NotebookPage onNavigate={handleNavigate} language={language} translations={t} onToggleLanguage={toggleLanguage} />;
       case 'investors':
         return <InvestorsPage />;
       case 'about':
@@ -142,22 +143,33 @@ const App: React.FC = () => {
     }
   };
 
+  const showGlobalNavbar = !['telecom', 'fintech', 'fitness', 'cv-maker', 'nova-tax', 'foldable', 'notebook', 'chat-web'].includes(currentView);
+
   return (
-    <div className={`min-h-screen bg-white text-gray-900 selection:bg-black selection:text-white ${language === 'ar' ? 'font-tajawal' : 'font-sans'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      <Navbar 
-        onNavigate={handleNavigate} 
-        cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)} 
-        currentView={currentView} 
-        language={language} 
-        translations={t} 
-      />
+    <div className={`min-h-screen bg-white text-gray-900 selection:bg-black selection:text-white overflow-x-hidden ${language === 'ar' ? 'font-tajawal' : 'font-sans'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      {showGlobalNavbar && (
+        <Navbar 
+          onNavigate={handleNavigate} 
+          cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)} 
+          currentView={currentView} 
+          language={language} 
+          translations={t} 
+          onToggleLanguage={toggleLanguage}
+        />
+      )}
       
-      <main className="pt-0">
+      <main className={showGlobalNavbar ? "pt-0" : ""}>
         {renderView()}
       </main>
 
-      <Footer onNavigate={handleNavigate} language={language} onToggleLanguage={toggleLanguage} translations={t} />
-      <ChatSupport language={language} />
+      <Footer 
+        onNavigate={handleNavigate} 
+        language={language} 
+        onToggleLanguage={toggleLanguage} 
+        translations={t} 
+        onOpenChat={() => setIsChatOpen(true)}
+      />
+      <ChatSupport language={language} isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
     </div>
   );
 };

@@ -43,7 +43,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ title, subtitle, products, bg
                     onClick={() => handleProductClick(product)}
                 >
                     {/* Image */}
-                    <div className="aspect-[3/4] w-full overflow-hidden bg-gray-50 mb-6 relative rounded-[40px] border border-transparent group-hover:border-gray-100 transition-all duration-700">
+                    <div className="aspect-[3/4] w-full overflow-hidden bg-white mb-6 relative rounded-[40px] border border-transparent group-hover:border-gray-100 transition-all duration-700">
                         <img 
                             src={product.image} 
                             alt={product.name} 
