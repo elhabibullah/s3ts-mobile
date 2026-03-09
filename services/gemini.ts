@@ -1,9 +1,18 @@
 
 import { GoogleGenAI, Chat } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+let aiInstance: GoogleGenAI | null = null;
+
+const getAiInstance = () => {
+  if (!aiInstance) {
+    const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY || '';
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+};
 
 export const createChatSession = (): Chat => {
+  const ai = getAiInstance();
   return ai.chats.create({
     model: 'gemini-3-flash-preview',
     config: {
