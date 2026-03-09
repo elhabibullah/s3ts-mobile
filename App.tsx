@@ -9,6 +9,7 @@ import StorePage from './components/StorePage';
 import CartPage from './components/CartPage';
 import InvestorsPage from './components/InvestorsPage';
 import AboutPage from './components/AboutPage';
+import FounderPage from './components/FounderPage';
 import S3TsChatWeb from './components/S3TsChatWeb';
 import TelecomPage from './components/TelecomPage';
 import FintechPage from './components/FintechPage';
@@ -93,6 +94,18 @@ const App: React.FC = () => {
         return (
           <>
             <Hero onNavigate={handleNavigate} language={language} translations={t} />
+            
+            <section className="py-20 md:py-32 bg-white text-black reveal">
+                <div className="max-w-4xl mx-auto px-6 text-center">
+                    <h2 className="text-xl md:text-3xl font-display font-medium mb-8 leading-tight tracking-tight">
+                        {t.satellite_p1}
+                    </h2>
+                    <p className="text-gray-600 text-base md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                        {t.satellite_p2}
+                    </p>
+                </div>
+            </section>
+
             <section id="ai" className="py-20 md:py-32 bg-black text-white reveal overflow-hidden">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12">
                    <div className="flex flex-col md:flex-row items-center justify-between gap-12">
@@ -105,6 +118,31 @@ const App: React.FC = () => {
                             <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_bg_removed_facial_recognition.png" alt="S3Ts Neural Face ID" className="h-64 md:h-96 w-auto object-contain drop-shadow-2xl opacity-90"/>
                        </div>
                    </div>
+                </div>
+            </section>
+
+            <section className="bg-black pb-20 md:pb-32 reveal">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-12 space-y-12 md:space-y-20">
+                    <img 
+                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-golden-dust.jpg" 
+                        alt="S3Ts Golden Dust" 
+                        className="w-full h-auto rounded-3xl shadow-2xl object-cover"
+                        referrerPolicy="no-referrer"
+                    />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <img 
+                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-inside_mechanics.jpg" 
+                            alt="S3Ts Inside Mechanics" 
+                            className="w-full h-auto rounded-3xl shadow-2xl"
+                            referrerPolicy="no-referrer"
+                        />
+                        <img 
+                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3TS-Beam-night-hand.jpg" 
+                            alt="S3Ts Beam Night Hand" 
+                            className="w-full h-auto rounded-3xl shadow-2xl"
+                            referrerPolicy="no-referrer"
+                        />
+                    </div>
                 </div>
             </section>
             <ProductGrid 
@@ -138,6 +176,8 @@ const App: React.FC = () => {
         return <InvestorsPage />;
       case 'about':
         return <AboutPage onNavigate={() => handleNavigate('home')} language={language} translations={t} />;
+      case 'founder':
+        return <FounderPage onNavigate={() => handleNavigate('home')} language={language} translations={t} />;
       default:
         return <Hero onNavigate={handleNavigate} language={language} translations={t} />;
     }

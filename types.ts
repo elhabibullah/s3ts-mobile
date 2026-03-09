@@ -34,4 +34,4 @@ export enum LoadingState {
 
 export type Language = 'en' | 'ar';
 
-export type AppView = 'home' | 'store' | 'investors' | 'about' | 'chat-web' | 'fitness' | 'fintech' | 'cv-maker' | 'nova-tax' | 'telecom' | 'foldable' | 'notebook' | 'cart';
+export type AppView = 'home' | 'store' | 'investors' | 'about' | 'founder' | 'chat-web' | 'fitness' | 'fintech' | 'cv-maker' | 'nova-tax' | 'telecom' | 'foldable' | 'notebook' | 'cart';

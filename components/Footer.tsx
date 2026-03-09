@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Youtube, Globe } from 'lucide-react';
 import { Language } from '../types';
 
 interface FooterProps {
-  onNavigate: (view: 'home' | 'store' | 'investors' | 'about') => void;
+  onNavigate: (view: any) => void;
   language: Language;
   onToggleLanguage: () => void;
   translations: any;
@@ -27,6 +27,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
     } else if (linkName === 'About Us' || linkName === 'عن الشركة') {
       onNavigate('about');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (linkName === 'The Founder' || linkName === 'المؤسس') {
+      onNavigate('founder');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (linkName === 'Virtual Assistant' || linkName === 'مساعد افتراضي') {
       onOpenChat?.();
     }
@@ -48,6 +51,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
     ],
     [translations.footer_explore]: [
         language === 'ar' ? 'عن الشركة' : 'About Us', 
+        language === 'ar' ? 'المؤسس' : 'The Founder',
         language === 'ar' ? 'نظام عصبي' : 'Neural OS', 
         language === 'ar' ? 'البيان' : 'Manifesto', 
         language === 'ar' ? 'الاستدامة' : 'Sustainability', 
