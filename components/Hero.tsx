@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, language, translations }) => {
           {/* Phone Render */}
           <div className="w-[85%] max-w-[450px] md:max-w-[550px] relative z-20 animate-float">
              <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_on_transparent.png" 
+                src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_on_transparent.png" 
                 alt="S3Ts Pro 3.0"
                 className="w-full h-auto object-contain drop-shadow-2xl"
               />

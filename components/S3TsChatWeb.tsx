@@ -597,7 +597,7 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
                 <div className="w-32 h-32 mx-auto relative flex items-center justify-center">
                      <div className={`absolute inset-0 border-2 border-teal-500/30 rounded-full ${loginStep === 'verifying' ? 'animate-ping' : ''}`}></div>
                      <div className="absolute inset-0 border-2 border-t-teal-400 border-r-transparent border-b-teal-400 border-l-transparent rounded-full animate-spin"></div>
-                     <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" className="w-24 h-24 rounded-full opacity-80" alt="Logo" />
+                     <img src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_chat_logo.jpg" className="w-24 h-24 rounded-full opacity-80" alt="Logo" />
                 </div>
 
                 <div className="bg-black/40 backdrop-blur-sm p-4 rounded-xl border border-teal-900/30">
@@ -622,7 +622,7 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
       {callStatus !== 'idle' && (
           <div className="absolute inset-0 z-[60] bg-black/90 backdrop-blur-xl flex flex-col items-center justify-center animate-fade-in">
               <div className={`w-32 h-32 rounded-full border-4 ${accentBorder} shadow-[0_0_50px_rgba(20,184,166,0.5)] flex items-center justify-center mb-8 relative`}>
-                   <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" className="w-full h-full rounded-full opacity-50" />
+                   <img src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_chat_logo.jpg" className="w-full h-full rounded-full opacity-50" />
                    <div className={`absolute inset-0 rounded-full border-4 ${accentBorder} animate-ping`}></div>
               </div>
               <h2 className="text-3xl font-display text-white mb-2">{activeCallName || activeContact.name}</h2>
@@ -849,7 +849,7 @@ const S3TsChatWeb: React.FC<S3TsChatWebProps> = ({ onNavigate }) => {
          <div className={`h-20 px-4 border-b ${isHubMode ? 'border-yellow-900/30' : 'border-teal-900/30'} flex justify-between items-center bg-black/80 backdrop-blur-md`}>
              <div className="flex items-center relative gap-1">
                  <img 
-                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chat_logo.jpg" 
+                    src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_chat_logo.jpg" 
                     alt="Logo" 
                     className={`h-10 w-10 rounded-lg opacity-90 transition-all ${isHubMode ? 'sepia brightness-110' : ''}`}
                  />

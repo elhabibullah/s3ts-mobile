@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, cartCount = 0, currentView,
           <div className="flex-0 flex justify-center absolute left-1/2 transform -translate-x-1/2 z-50">
             <button onClick={() => onNavigate('home')} className="flex flex-col items-center group">
                <img 
-                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Logo-sumamah-S-TRANSPARENT-bg.png" 
+                  src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Logo-sumamah-S-TRANSPARENT-bg.png" 
                   alt="Sumāmah Logo" 
                   className="h-14 md:h-20 w-auto transition-transform duration-500 group-hover:scale-105"
                />

@@ -148,7 +148,7 @@ const NovaTaxPage: React.FC<NovaTaxPageProps> = ({ onNavigate, language = 'en', 
           <div className="relative z-10 max-w-4xl mx-auto">
               <div className="w-72 h-72 md:w-[500px] md:h-[500px] mx-auto -mt-8 md:-mt-12 mb-0 md:mb-2 flex items-center justify-center animate-float">
                   <img 
-                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/NovaTax__logo-invisible-background.png" 
+                    src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/NovaTax__logo-invisible-background.png" 
                     alt="NovaTax Logo" 
                     className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]"
                     referrerPolicy="no-referrer"

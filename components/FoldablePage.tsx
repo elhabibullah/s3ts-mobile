@@ -43,7 +43,7 @@ const FoldablePage: React.FC<FoldablePageProps> = ({ onNavigate, language = 'en'
               <h1 className={`text-5xl md:text-[80px] leading-none mb-12 tracking-tight text-black ${displayFont}`}>{t.foldable_title}</h1>
               <div className="w-full max-w-[750px] mx-auto flex justify-center mb-16">
                   <img 
-                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sumamah-F_folder.jpg" 
+                    src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Sumamah-F_folder.jpg" 
                     alt="Sumāmah F" 
                     className="w-full h-auto object-contain drop-shadow-2xl rounded-[40px] shadow-2xl transition-transform duration-700 hover:scale-105"
                   />

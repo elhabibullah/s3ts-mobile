@@ -13,14 +13,14 @@ interface StorePageProps {
 }
 
 const VARIANTS = [
-    { id: 'grey', name: 'Chrome Grey', color: 'bg-[#8E8E8E]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_chrome-grey_transparent.png' },
-    { id: 'black', name: 'Black Onyx Mat', color: 'bg-[#1A1A1A]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_black-onyx-mat_transparent.png' },
-    { id: 'blue', name: 'Navy Blue', color: 'bg-[#000080]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_navy-blue_transparent.png' },
-    { id: 'green', name: 'Green Forest-Emerald', color: 'bg-[#00402E]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_green-forest-emerauld_transparent.png' },
-    { id: 'rose', name: 'Golden Rose', color: 'bg-[#E6BE8A]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_golden-rose_transparent.png' },
-    { id: 'white', name: 'White', color: 'bg-[#FFFFFF] border-gray-200', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_white_transparent.png' },
-    { id: 'bordeaux', name: 'Bordeaux', color: 'bg-[#800020]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_bordeaux_transparent.png' },
-    { id: 'mokka', name: 'Brown Mokka', color: 'bg-[#4B3621]', image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_brown-mokka_transparent.png' },
+    { id: 'grey', name: 'Chrome Grey', color: 'bg-[#8E8E8E]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_chrome-grey_transparent.png' },
+    { id: 'black', name: 'Black Onyx Mat', color: 'bg-[#1A1A1A]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_black-onyx-mat_transparent.png' },
+    { id: 'blue', name: 'Navy Blue', color: 'bg-[#000080]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_navy-blue_transparent.png' },
+    { id: 'green', name: 'Green Forest-Emerald', color: 'bg-[#00402E]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_green-forest-emerauld_transparent.png' },
+    { id: 'rose', name: 'Golden Rose', color: 'bg-[#E6BE8A]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_golden-rose_transparent.png' },
+    { id: 'white', name: 'White', color: 'bg-[#FFFFFF] border-gray-200', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_white_transparent.png' },
+    { id: 'bordeaux', name: 'Bordeaux', color: 'bg-[#800020]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_bordeaux_transparent.png' },
+    { id: 'mokka', name: 'Brown Mokka', color: 'bg-[#4B3621]', image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_brown-mokka_transparent.png' },
 ];
 
 const StorePage: React.FC<StorePageProps> = ({ onAddToCart, language = 'en', translations, selectedProductId, onProductSelect }) => {

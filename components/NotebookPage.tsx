@@ -43,7 +43,7 @@ const NotebookPage: React.FC<NotebookPageProps> = ({ onNavigate, language = 'en'
               <h1 className={`text-5xl md:text-[80px] leading-none mb-12 tracking-tight text-white drop-shadow-2xl ${displayFont}`}>{t.notebook_title}</h1>
               <div className="w-full max-w-[850px] mx-auto mb-16 overflow-hidden rounded-[30px] shadow-2xl border border-white/10">
                   <img 
-                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sumamah-aura_recto-text.jpg" 
+                    src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Sumamah-aura_recto-text.jpg" 
                     alt="Sumāmah Aura Hero" 
                     className="w-full h-auto object-contain transition-transform duration-1000 hover:scale-105"
                   />
@@ -122,7 +122,7 @@ const NotebookPage: React.FC<NotebookPageProps> = ({ onNavigate, language = 'en'
                   </div>
                   <div className="flex-1 w-full aspect-video bg-zinc-100 rounded-[40px] shadow-2xl flex items-center justify-center p-8 overflow-hidden">
                        <img 
-                         src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sumamah-aura_recto.jpg" 
+                         src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Sumamah-aura_recto.jpg" 
                          alt="Sumāmah Aura" 
                          className="w-full h-auto object-contain rounded-2xl"
                        />

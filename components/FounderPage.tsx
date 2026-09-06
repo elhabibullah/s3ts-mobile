@@ -33,7 +33,7 @@ const FounderPage: React.FC<FounderPageProps> = ({ onNavigate, language = 'en', 
         <div className="max-w-2xl mx-auto mt-8 md:mt-12">
             <div className="mb-10 flex justify-center">
                 <img 
-                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Habibullah-Forbes.jpg" 
+                    src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Habibullah-Forbes.jpg" 
                     alt="Abdelwahid Habibullah Adam Banu Hashim" 
                     className="w-72 md:w-80 h-auto rounded-lg shadow-md border border-gray-100 object-cover"
                     referrerPolicy="no-referrer"

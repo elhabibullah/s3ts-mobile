@@ -32,7 +32,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, language = 'en', tran
         {/* Brand Icon */}
         <div className="mx-auto mb-8 flex justify-center">
             <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Logo-sumamah-S-TRANSPARENT-bg.png" 
+                src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Logo-sumamah-S-TRANSPARENT-bg.png" 
                 alt="Sumāmah Logo" 
                 className="h-16 md:h-20 w-auto"
             />

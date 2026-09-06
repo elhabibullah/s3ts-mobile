@@ -14,7 +14,7 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en', 
   const displayFont = isAr ? 'font-amiri font-bold' : 'font-display font-medium';
 
   // Logo URL constant
-  const LOGO_URL = "https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sum%C4%81mah-Telecom.jpg";
+  const LOGO_URL = "https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Sum%C4%81mah-Telecom.jpg";
 
   return (
     <div className={`bg-black text-white ${fontSans} ${isAr ? 'text-right' : 'text-left'} overflow-x-hidden selection:bg-[#00D4C6] selection:text-black`} dir={isAr ? 'rtl' : 'ltr'}>
@@ -109,7 +109,7 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en', 
            {/* RESIZED: w-40 md:w-64. MOVED: top-20 (to avoid text) */}
            <div className="absolute top-20 right-0 w-40 md:w-64 z-20 opacity-90 pointer-events-none mix-blend-lighten animate-float">
                 <img 
-                    src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_solo_frontal-diagonal.png" 
+                    src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_solo_frontal-diagonal.png" 
                     alt="S3Ts Antenna" 
                     className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,212,198,0.2)]"
                 />
@@ -154,7 +154,7 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en', 
                    <div className="relative w-[320px] h-[450px] md:w-[480px] md:h-[640px] rounded-[40px] overflow-hidden shadow-2xl rotate-[-2deg] border border-white/10 group bg-zinc-900">
                        <div className="absolute inset-0 bg-gradient-to-br from-[#00D4C6]/20 to-[#B480FF]/20 z-0"></div>
                        <img 
-                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Family_beach.jpg" 
+                            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Family_beach.jpg" 
                             alt="Freedom" 
                             className="relative z-10 w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000 grayscale-[20%] group-hover:grayscale-0"
                        />
@@ -170,7 +170,7 @@ const TelecomPage: React.FC<TelecomPageProps> = ({ onNavigate, language = 'en', 
                    {/* RESIZED: Reduced to w-44 md:w-72 (from w-52 md:w-80). Repositioned to -top-16 */}
                    <div className="absolute -top-16 -right-6 md:-right-12 w-44 md:w-72 z-30 animate-float" style={{ animationDelay: '1s' }}>
                         <img 
-                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_solo_frontal.png" 
+                            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_solo_frontal.png" 
                             alt="S3Ts Phone Frontal" 
                             className="w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
                         />

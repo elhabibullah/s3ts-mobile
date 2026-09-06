@@ -31,7 +31,7 @@ const FintechPage: React.FC<FintechPageProps> = ({ onNavigate, language = 'en', 
         </button>
         <div className="flex-1 flex justify-center">
           <img 
-            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/H3_logo.png" 
+            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/H3_logo.png" 
             alt="H3 Logo" 
             className="h-12 md:h-16 w-auto object-contain brightness-[10] contrast-200"
           />
@@ -58,7 +58,7 @@ const FintechPage: React.FC<FintechPageProps> = ({ onNavigate, language = 'en', 
           <div className="mb-12 max-w-4xl">
               <div className="mb-8">
                 <img 
-                  src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/H3_logo.png" 
+                  src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/H3_logo.png" 
                   alt="H3 Fintech Logo" 
                   className="h-16 md:h-24 w-auto object-contain brightness-[10] contrast-200"
                 />
@@ -93,7 +93,7 @@ const FintechPage: React.FC<FintechPageProps> = ({ onNavigate, language = 'en', 
               <div className="flex-1 w-full flex justify-start">
                   <div className="relative w-full max-w-md group">
                       <img 
-                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/H3_bankcards-no_bg.png" 
+                        src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/H3_bankcards-no_bg.png" 
                         alt="H3 Bankcards" 
                         className="w-full h-auto drop-shadow-[0_20px_60px_rgba(34,197,94,0.3)] transform rotate-[-2deg] group-hover:rotate-0 transition-transform duration-1000 brightness-125 contrast-125"
                       />
@@ -199,7 +199,7 @@ const FintechPage: React.FC<FintechPageProps> = ({ onNavigate, language = 'en', 
                   <div className="flex-1 flex justify-start lg:justify-end">
                       <div className="relative group">
                           <img 
-                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/H3_bankcards-no_bg.png" 
+                            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/H3_bankcards-no_bg.png" 
                             className="w-full max-w-sm h-auto transform lg:rotate-[-5deg] group-hover:rotate-0 transition-transform duration-1000 grayscale group-hover:grayscale-0 contrast-125 brightness-125 drop-shadow-[0_20px_60px_rgba(255,255,255,0.15)]"
                             alt="Titanium Prestige Card"
                           />
@@ -244,7 +244,7 @@ const FintechPage: React.FC<FintechPageProps> = ({ onNavigate, language = 'en', 
                   <div className="flex-1 flex justify-start">
                       <div className="relative group">
                           <img 
-                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/H3_bankcards-no_bg.png" 
+                            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/H3_bankcards-no_bg.png" 
                             className="w-full max-w-sm h-auto transform lg:rotate-[5deg] group-hover:rotate-0 transition-transform duration-1000 hue-rotate-[100deg] contrast-125 brightness-125 drop-shadow-[0_20px_60px_rgba(34,197,94,0.3)]"
                             alt="Watani Card"
                           />

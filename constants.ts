@@ -19,7 +19,7 @@ export const NAV_ITEMS: NavItem[] = [
 export const HERO_SLIDES = [
   {
     id: 1,
-    image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Metaball_liquid_wt_bg.mp4',
+    image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Metaball_liquid_wt_bg.mp4',
     title: 'S3Ts Pro 3.0',
     subtitle: '',
   }
@@ -30,7 +30,7 @@ export const PRODUCTS: Product[] = [
     id: 'pro3',
     name: 'S3Ts Pro 3.0',
     tagline: '',
-    image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_off.png',
+    image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_off.png',
     series: 'X',
     price: 'SAR 6,375.00',
     specs: [
@@ -45,7 +45,7 @@ export const PRODUCTS: Product[] = [
     id: 'foldable',
     name: 'SUMĀMAH F',
     tagline: '',
-    image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sumamah-F_folder.jpg',
+    image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Sumamah-F_folder.jpg',
     series: 'X',
     price: 'SAR 8,999.00',
     specs: [
@@ -60,7 +60,7 @@ export const PRODUCTS: Product[] = [
     id: 'notebook',
     name: 'SUMĀMAH Aura',
     tagline: '',
-    image: 'https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Sumamah-aura_recto-text.jpg',
+    image: 'https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Sumamah-aura_recto-text.jpg',
     series: 'X',
     price: 'SAR 14,989.00',
     specs: [

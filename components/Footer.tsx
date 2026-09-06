@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, language, onToggleLanguage,
         {/* Brand and Logo Section */}
         <div className="flex flex-col items-center mb-16">
             <img 
-                src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/Logo-sumamah-S-TRANSPARENT-bg.png" 
+                src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/Logo-sumamah-S-TRANSPARENT-bg.png" 
                 alt="Sumāmah Logo" 
                 className="h-20 md:h-28 w-auto mb-6 transition-transform hover:scale-110 duration-500"
             />

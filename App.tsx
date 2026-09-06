@@ -115,7 +115,7 @@ const App: React.FC = () => {
                           <p className="text-gray-400 text-sm leading-relaxed tracking-wide max-w-md mx-auto md:mx-0 font-sans font-light">{t.bio_desc}</p>
                        </div>
                        <div className="flex-1 flex justify-center md:justify-end order-1 md:order-2">
-                            <img src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts_bg_removed_facial_recognition.png" alt="S3Ts Neural Face ID" className="h-64 md:h-96 w-auto object-contain drop-shadow-2xl opacity-90"/>
+                            <img src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts_bg_removed_facial_recognition.png" alt="S3Ts Neural Face ID" className="h-64 md:h-96 w-auto object-contain drop-shadow-2xl opacity-90"/>
                        </div>
                    </div>
                 </div>
@@ -124,20 +124,20 @@ const App: React.FC = () => {
             <section className="bg-black pb-20 md:pb-32 reveal">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12 space-y-12 md:space-y-20">
                     <img 
-                        src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-golden-dust.jpg" 
+                        src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts-golden-dust.jpg" 
                         alt="S3Ts Golden Dust" 
                         className="w-full h-auto rounded-3xl shadow-2xl object-cover"
                         referrerPolicy="no-referrer"
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                         <img 
-                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3Ts-inside_mechanics.jpg" 
+                            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3Ts-inside_mechanics.jpg" 
                             alt="S3Ts Inside Mechanics" 
                             className="w-full h-auto rounded-3xl shadow-2xl"
                             referrerPolicy="no-referrer"
                         />
                         <img 
-                            src="https://fit-4rce-x.s3.eu-north-1.amazonaws.com/S3TS-Beam-night-hand.jpg" 
+                            src="https://raw.githubusercontent.com/elhabibullah/mon-stockage-media/refs/heads/main/S3TS-Beam-night-hand.jpg" 
                             alt="S3Ts Beam Night Hand" 
                             className="w-full h-auto rounded-3xl shadow-2xl"
                             referrerPolicy="no-referrer"
